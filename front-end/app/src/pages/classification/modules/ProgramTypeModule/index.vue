@@ -67,6 +67,7 @@ export default {
       }
     },
     ...mapMutations({
+      updateClassification: `classification/program_type_module/update_classification`,
       updateHttpParams: `classification/movie_wall_module/${types.UPDATE_HTTP_PARAMS}`
     }),
     ...mapActions({
@@ -74,6 +75,7 @@ export default {
         "classification/program_type_module/getProgramTypesList"
     }),
     handleClickTab(val) {
+      this.updateClassification(val);
       this.$router.push({
         params: { program_type: val }
       });
