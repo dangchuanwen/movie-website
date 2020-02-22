@@ -8,7 +8,8 @@ const state = {
     program_type: "电影", // 节目类型（电影，电视剧，综艺，动漫）
     program_classification: "all", // 分类（喜剧，动作...)
     publish_year: "all", // 发布年份
-    publish_area: "all" // 出版地区
+    publish_area: "all", // 出版地区
+    num: 10
   }
 };
 
