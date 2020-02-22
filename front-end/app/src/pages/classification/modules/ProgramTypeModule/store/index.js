@@ -7,6 +7,11 @@ const state = {
 const mutations = {
   [types.SET_PROGRAM_TYPES_LIST](state, new_list) {
     state.program_types_list = new_list;
+    // 调用 classification 模块，更改其分类
+    this.commit(
+      "classification/classification_module/update_classification",
+      state.program_types_list[0].classifications
+    );
   },
   [types.UPDATE_CLASSIFICATION](state, val) {
     let { program_types_list } = state;

@@ -15,7 +15,7 @@
 
 <script>
 import types from "@/pages/classification/modules/MovieWallModule/store/mutations-type.js";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import ClassficationSwiper from "./components/ClassficationSwiper.vue";
 export default {
   name: "ClassficationModule",
@@ -31,16 +31,10 @@ export default {
         state.classification.classification_module.classification_datas
     })
   },
-  mounted() {
-    this.getClassificationDatas();
-  },
+  mounted() {},
   methods: {
     ...mapMutations({
       updateHttpParams: `classification/movie_wall_module/${types.UPDATE_HTTP_PARAMS}`
-    }),
-    ...mapActions({
-      getClassificationDatas:
-        "classification/classification_module/getClassificationDatas"
     }),
     handleClickClassfication(key, value) {
       this.updateHttpParams({ key, value });

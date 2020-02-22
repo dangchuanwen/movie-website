@@ -43,6 +43,11 @@ export default {
       listData: JSON.parse(JSON.stringify(this.classfication_list))
     };
   },
+  watch: {
+    classfication_list(new_val) {
+      this.listData = JSON.parse(JSON.stringify(new_val));
+    }
+  },
   methods: {
     handleClickClassfication(index) {
       this.active_index = index;
