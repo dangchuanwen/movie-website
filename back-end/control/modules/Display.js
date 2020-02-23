@@ -15,9 +15,30 @@ async function hotList(ctx) {
   const datas = await HOT_LIST.getHotList();
   ctx.body = Response(datas);
 }
+async function programWallDatas(ctx) {
+  const {
+    program_type,
+    program_classification,
+    publish_year,
+    publish_area,
+    last_id,
+    num
+  } = ctx.query;
+  const PROGRAM = require("../../model/tables/program");
+  const datas = await PROGRAM.getProgramWallDatas({
+    program_type,
+    program_classification,
+    publish_year,
+    publish_area,
+    last_id,
+    num
+  });
+  ctx.body = Response(datas);
+}
 
 module.exports = {
   bannerList,
   hotRecommendList,
-  hotList
-}
+  hotList,
+  programWallDatas
+};

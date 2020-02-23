@@ -1,2 +1,4 @@
 
-console.log(new Date().getTime())
+function fn(arr) {
+  
+}

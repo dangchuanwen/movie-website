@@ -1,4 +1,4 @@
-const { bannerList, hotRecommendList, hotList } = require("../control/modules/Display");
+const { bannerList, hotRecommendList, hotList, programWallDatas } = require("../control/modules/Display");
 const { classification, programTypes } = require("../control/modules/Fixed");
 const { login, watchHistory } = require("../control/modules/User");
 
@@ -30,6 +30,10 @@ const config = {
   ["/api/watchHistoryList"]: {
     method: "get",
     handle: watchHistory
+  },
+  ["/api/movieWallDatas"]: {
+    method: "get",
+    handle: programWallDatas
   }
 };
 

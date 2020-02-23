@@ -1,0 +1,95 @@
+connect ECONNREFUSED 127.0.0.1:3306, the error sql is: select program_classification from movie group by program_classification  Sat Feb 22 2020 10:15:29 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 12:59:26 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:00:48 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:01:08 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:01:31 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:01:43 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:03:18 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='undefined' and
+                 program_cl' at line 1, the error sql is: select * from  where 
+                 program_type='undefined' and
+                 program_classification like 'undefined' and
+                 publish_year like 'undefined' and
+                 publish_area like 'undefined' and
+                 id > undefined 
+                 limit undefined
+                 Sat Feb 22 2020 13:06:37 GMT+0800 (GMT+08:00)
+ER_BAD_FIELD_ERROR: Unknown column 'publish_year' in 'where clause', the error sql is: select * from movie where 
+                 program_type='电影' and
+                 program_classification like '惊悚' and
+                 publish_year like '2018' and
+                 publish_area like '大陆' and
+                 id > 0 
+                 limit 10
+                 Sat Feb 22 2020 13:09:46 GMT+0800 (GMT+08:00)
+ER_BAD_FIELD_ERROR: Unknown column 'publish_area' in 'where clause', the error sql is: select * from movie where 
+                 program_type='电影' and
+                 program_classification like '惊悚' and
+                 release_year like '2018' and
+                 publish_area like '大陆' and
+                 id > 0 
+                 limit 10
+                 Sat Feb 22 2020 13:10:27 GMT+0800 (GMT+08:00)
+ER_BAD_FIELD_ERROR: Unknown column 'publish_area' in 'where clause', the error sql is: select * from movie where 
+                 program_type='电影' and
+                 program_classification like '惊悚' and
+                 release_year like '2018' and
+                 publish_area like '大陆' and
+                 id > 0 
+                 limit 10
+                 Sat Feb 22 2020 13:10:28 GMT+0800 (GMT+08:00)
