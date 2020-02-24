@@ -31,6 +31,31 @@ class Program extends Mysql {
     const results = await this.query(sql);
     return Promise.resolve(results);
   }
+  async searchProgram(key_word) {
+    const tabs = ["movie", "tv_play", "comic", "variety_show"];
+    let promises = [];
+    let datas = [];
+    tabs.forEach(tab => {
+      const sql = `select name from (select name from ${tab} where name like '%${key_word}%') temp group by name;`;
+      let promise = this.query(sql);
+      promises.push(promise);
+    });
+    let results = await Promise.all(promises);
+    if (results && results.length > 0) {
+      results.forEach((result, index) => {
+        //  data为一个表中查到的的数据
+        result.forEach(item => {
+          item.type = tabs[index];
+          datas.push(item);
+        });
+      });
+    }
+    // 排序，关键字靠前的在前面, 长度短靠前
+    datas.sort((prev, next) => {
+      return prev.name.indexOf(key_word) - next.name.indexOf(key_word) || prev.name.length - next.name.length;
+    });
+    return Promise.resolve(datas);
+  }
 }
 
 module.exports = new Program();
