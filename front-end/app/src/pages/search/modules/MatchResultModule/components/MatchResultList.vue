@@ -6,7 +6,7 @@
       :key="index"
       @click="handleClickItem(item)"
     >
-      <span class="match-result">{{ item }}</span>
+      <span class="match-result">{{ item.name }}</span>
     </div>
   </div>
 </template>

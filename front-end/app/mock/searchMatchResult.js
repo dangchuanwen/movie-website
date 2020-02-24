@@ -1,7 +1,10 @@
 const res = {
   status: 0,
   msg: "ok",
-  datas: ["查询结果1", "查询结果2"]
+  datas: [
+    { type: "movie", name: "查询结果一", id: 1 },
+    { type: "comic", name: "查询结果二", id: 33 }
+  ]
 };
 
 module.exports = res;
