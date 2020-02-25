@@ -1,5 +1,5 @@
 const Response = require("../Response");
-const User = require("../../model/tables/user_list");
+const User = require("../../model/tables/user");
 const WatchNotes = require("../../model/tables/watch_notes");
 async function login(ctx) {
   const md5 = require("md5");
@@ -36,7 +36,14 @@ async function watchHistory(ctx) {
   ctx.body = Response(datas);
 }
 
+async function allWatchHistory(ctx) {
+  let token = "dd";
+  const datas = await WatchNotes.getAllWatchNotes(token);
+  ctx.body = Response(datas);
+}
+
 module.exports = {
   login,
-  watchHistory
+  watchHistory,
+  allWatchHistory
 }

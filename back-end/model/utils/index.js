@@ -1,3 +1,8 @@
+/**
+ * 二次并发查询，根据每条数据的信息进行二次查询
+ * @param {Array(第一次查询获取的数组)} results 
+ * @param {Function(result: 数组中的一条数据) => {}} query 
+ */
 function mergeSeriesQuery(results, query) {
   let promises_store = [];
   results.forEach(result => {

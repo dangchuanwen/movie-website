@@ -18,7 +18,6 @@ class User extends Mysql {
   async addUser(token) {
     const sql = `insert into ${ this.table_name } (token)values('${ token }')`;
     const result = await this.query(sql);
-    console.log(typeof result);
     if (typeof result !== "string") {
       return Promise.resolve("success");
     } else {
