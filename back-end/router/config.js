@@ -1,7 +1,7 @@
 const { bannerList, hotRecommendList, hotList, programWallDatas } = require("../control/modules/Display");
 const { classification, programTypes } = require("../control/modules/Fixed");
 const { login, watchHistory } = require("../control/modules/User");
-const { searchRecommend, searchProgram } = require("../control/modules/Function");
+const { searchRecommend, searchProgram, programInfo } = require("../control/modules/Function");
 
 const config = {
   ["/api/bannerList"]: {
@@ -43,6 +43,10 @@ const config = {
   ["/api/searchMatchResult"]: {
     method: "get",
     handle: searchProgram
+  },
+  ["/api/programInfo"]: {
+    method: "get",
+    handle: programInfo
   }
 };
 

@@ -56,6 +56,11 @@ class Program extends Mysql {
     });
     return Promise.resolve(datas);
   }
+  async getProgramInfo(id, type) {
+    const sql = `select * from ${ type } where id=${id} limit 1`;
+    const result = await this.query(sql);
+    return Promise.resolve(result);
+  }
 }
 
 module.exports = new Program();
