@@ -5,17 +5,18 @@
       <banner-module></banner-module>
       <program-bar-module></program-bar-module>
       <watch-history-module></watch-history-module>
-      <!-- <hot-module></hot-module> -->
+      <hot-module v-if="!ifHaveHistoryNote"></hot-module>
       <recommend-module></recommend-module>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import SearchModule from "./modules/SearchModule";
 import BannerModule from "./modules/BannerModule";
 import ProgramBarModule from "./modules/ProgramBarModule";
-// import HotModule from "./modules/HotModule";
+import HotModule from "./modules/HotModule";
 import RecommendModule from "./modules/RecommendModule";
 import WatchHistoryModule from "./modules/WatchHistoryModule";
 export default {
@@ -24,7 +25,7 @@ export default {
     SearchModule,
     BannerModule,
     ProgramBarModule,
-    // HotModule,
+    HotModule,
     RecommendModule,
     WatchHistoryModule
   },
@@ -39,6 +40,12 @@ export default {
         y: null
       }
     };
+  },
+  computed: {
+    ...mapState({
+      ifHaveHistoryNote: state =>
+        state.home.watch_history_module.watch_history_list.length > 0
+    })
   },
   mounted() {},
   methods: {},

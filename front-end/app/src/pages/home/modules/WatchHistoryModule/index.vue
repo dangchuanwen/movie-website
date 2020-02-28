@@ -3,7 +3,7 @@
     <div class="sub-title-wrapper">
       <sub-title :title="'观看历史'" :link_url="'/history'"></sub-title>
     </div>
-    <div class="hot-list-wrapper">
+    <div class="history-list-wrapper">
       <div class="list-wrapper flex">
         <hot-item
           class="f-fixed hot-item"
@@ -41,7 +41,7 @@ export default {
   watch: {
     hot_list() {
       this.$nextTick(() => {
-        this.bScroll = new BScroll(".hot-list-wrapper", {
+        this.bScroll = new BScroll(".history-list-wrapper", {
           scrollX: true,
           preventDefault: false
         });
@@ -63,7 +63,7 @@ export default {
     margin: 0 auto;
     width: 355px;
   }
-  .hot-list-wrapper {
+  .history-list-wrapper {
     position: relative;
     margin-top: 5px;
     padding: 0 10px;

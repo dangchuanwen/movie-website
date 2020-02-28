@@ -3,7 +3,7 @@ const program_info = {
   poster:
     "https://img.sokoyo-rj.com/tuku/upload/vod/2019-09-21/201909211569064343.jpg",
   type: "电视剧",
-  latest_plot: 34,
+  fragment_number: 34,
   watching_plot: 2
 };
 

@@ -1,9 +1,9 @@
 let datas = [
   {
-    score: Math.random(10) * 10,
-    link_url: "http://v.usfun.top:1024/inc/play.php?mid=g6nnahH5R0X6SB",
+    program_score: Math.random(10) * 10,
+    link_url: "",
     name: "中国机长",
-    movie_img_url:
+    poster_url:
       "https://p.ssl.qhimg.com/d/dy_8256348c102f6662b463b0f2b59ddff1.jpg"
   }
 ];

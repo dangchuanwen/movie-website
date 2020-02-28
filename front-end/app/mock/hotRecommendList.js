@@ -7,7 +7,7 @@ const list = [
     is_very_hot: true,
     poster_url:
       "http://img2.imgtn.bdimg.com/it/u=1302954416,3968366524&fm=26&gp=0.jpg",
-    director: "格恩迪"
+    director_name: "格恩迪"
   },
   {
     link_url: "",
@@ -17,7 +17,7 @@ const list = [
     name: "驯龙高手2",
     poster_url:
       "http://img2.imgtn.bdimg.com/it/u=1302954416,3968366524&fm=26&gp=0.jpg",
-    director: "格恩迪"
+    director_name: "格恩迪"
   },
   {
     link_url: "",
@@ -27,7 +27,7 @@ const list = [
     name: "驯龙高手1",
     poster_url:
       "http://img2.imgtn.bdimg.com/it/u=1302954416,3968366524&fm=26&gp=0.jpg",
-    director: "格恩迪"
+    director_name: "格恩迪"
   }
 ];
 

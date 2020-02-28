@@ -22,7 +22,7 @@
       <i class="iconfont icon-hot" v-if="movie.is_very_hot"></i>
     </div>
 
-    <span class="director">{{ movie.director }}</span>
+    <span class="director">{{ movie.director_name }}</span>
   </a>
 </template>
 

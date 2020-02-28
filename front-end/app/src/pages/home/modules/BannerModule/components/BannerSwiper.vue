@@ -17,7 +17,7 @@
             <div class="name">{{ item.name }}</div>
             <div class="score flex">
               <div class="star-wrapper">
-                <rate-component :score="item.score"></rate-component>
+                <rate-component :score="item.program_score"></rate-component>
               </div>
             </div>
           </div>

@@ -1,11 +1,14 @@
 <template>
   <div class="movie-poster-wrapper" v-if="movie.name">
-    <a class="link-tag" :href="movie.movie_url">
+    <a class="link-tag" :data-link="movie.link_url">
       <div class="movie-poster">
-        <img class="movie-img" :src="movie.movie_img_url" alt="" />
+        <img class="movie-img" :src="movie.poster_url" alt="" />
       </div>
       <div class="movie-name flex f-ai-c">{{ movie.name }}</div>
-      <rate-component :score="movie.score" :color="'#FFFF73'"></rate-component>
+      <rate-component
+        :program_score="movie.program_score"
+        :color="'#FFFF73'"
+      ></rate-component>
     </a>
   </div>
 </template>
@@ -23,7 +26,7 @@ export default {
       default: () => {
         return {
           name: "",
-          movie_img_url: "",
+          poster_url: "",
           movie_url: ""
         };
       }

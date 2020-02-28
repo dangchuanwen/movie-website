@@ -5,7 +5,7 @@ const list = [
     poster_url:
       "http://img3.imgtn.bdimg.com/it/u=3637982968,3840223623&fm=26&gp=0.jpg",
     name: "精灵旅社1",
-    score: 8.5,
+    program_score: 8.5,
     poster_main_color: "#1ADC95"
   },
   {
@@ -14,7 +14,7 @@ const list = [
     poster_url:
       "http://img4.imgtn.bdimg.com/it/u=709030033,2376175893&fm=26&gp=0.jpg",
     name: "精灵旅社2",
-    score: 8.1,
+    program_score: 8.1,
     poster_main_color: "#09c0e0"
   },
   {
@@ -23,7 +23,7 @@ const list = [
     poster_url:
       "http://img3.imgtn.bdimg.com/it/u=1604079741,3217664818&fm=26&gp=0.jpg",
     name: "精灵旅社3",
-    score: 9.0,
+    program_score: 9.0,
     poster_main_color: "#09c0e0"
   }
 ];

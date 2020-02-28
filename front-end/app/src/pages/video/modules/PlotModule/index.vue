@@ -1,8 +1,8 @@
 <template>
   <div class="plot-module">
     <plot-list
-      v-if="program_info.latest_plot"
-      :latest_plot="program_info.latest_plot"
+      v-if="program_info.fragment_number"
+      :latest_plot="program_info.fragment_number"
       :watching_plot="program_info.watching_plot"
       @handleClickPlotItem="handleClickPlotItem"
     ></plot-list>

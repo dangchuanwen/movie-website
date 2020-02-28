@@ -5,7 +5,7 @@
     </div>
     <div class="info-wrapper flex f-d-c">
       <span class="name">{{ note.name }}</span>
-      <span class="classification">{{ note.classification }}</span>
+      <span class="classification">{{ note.program_classification }}</span>
       <span class="progress-text"
         >已观看{{ note.progress | filterProgress }}%</span
       >
