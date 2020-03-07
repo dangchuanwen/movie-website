@@ -1,7 +1,8 @@
 const list = [
   {
     id: 0,
-    link_url: "",
+    belong: "comic",
+    link_url: "/video?id=1&belong=comic",
     poster_url:
       "http://img3.imgtn.bdimg.com/it/u=3637982968,3840223623&fm=26&gp=0.jpg",
     name: "精灵旅社1",
@@ -10,7 +11,8 @@ const list = [
   },
   {
     id: 1,
-    link_url: "",
+    belong: "/video?id=1&belong=comic",
+    link_url: "/video?id=1",
     poster_url:
       "http://img4.imgtn.bdimg.com/it/u=709030033,2376175893&fm=26&gp=0.jpg",
     name: "精灵旅社2",
@@ -19,7 +21,8 @@ const list = [
   },
   {
     id: 2,
-    link_url: "",
+    belong: "/video?id=1&belong=comic",
+    link_url: "/video?id=1",
     poster_url:
       "http://img3.imgtn.bdimg.com/it/u=1604079741,3217664818&fm=26&gp=0.jpg",
     name: "精灵旅社3",

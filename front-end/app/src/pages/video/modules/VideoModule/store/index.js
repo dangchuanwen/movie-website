@@ -11,10 +11,28 @@ const mutations = {
 };
 
 const actions = {
-  async getProgramInfo({ commit } /** 请求参数 */) {
+  async getOneOfTvPlayProgramInfo({ commit }, { belong, name, plot }) {
     let data = await request({
       method: "get",
-      url: "/api/programInfo"
+      url: "/api/tvPlayProgramInfo",
+      params: {
+        belong,
+        name,
+        plot
+      }
+    });
+    if (data && data.data && data.data.datas) {
+      commit(types.SET_PROGRAM_INFO, data.data.datas);
+    }
+  },
+  async getProgramInfo({ commit }, { id, belong }) {
+    let data = await request({
+      method: "get",
+      url: "/api/programInfo",
+      params: {
+        id,
+        belong
+      }
     });
     if (data && data.data && data.data.datas) {
       commit(types.SET_PROGRAM_INFO, data.data.datas);

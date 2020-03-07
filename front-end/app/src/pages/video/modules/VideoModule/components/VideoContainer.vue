@@ -32,6 +32,14 @@ export default {
       default: () => ""
     }
   },
+  watch: {
+    poster(new_val) {
+      this.playerOptions.poster = new_val;
+    },
+    src(new_val) {
+      this.playerOptions.sources[0].src = new_val;
+    }
+  },
   data() {
     return {
       waiting: false,

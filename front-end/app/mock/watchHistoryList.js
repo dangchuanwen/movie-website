@@ -1,5 +1,7 @@
 const hot_list = [
   {
+    id: 2,
+    belong: "comic",
     link_url: "",
     poster_url:
       "http://img5.imgtn.bdimg.com/it/u=1325682741,20284808&fm=26&gp=0.jpg",
@@ -9,6 +11,8 @@ const hot_list = [
     program_score: 8.0
   },
   {
+    id: 2,
+    belong: "comic",
     link_url: "",
     poster_url:
       "http://img5.imgtn.bdimg.com/it/u=107632766,3677925441&fm=26&gp=0.jpg",

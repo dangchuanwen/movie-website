@@ -3,14 +3,18 @@
     <div class="title-wrapper flex f-jc-sb">
       <span class="title">剧情</span>
       <span class="latest-plot"
-        >更新至34集<i class="iconfont icon-ziyuan"></i
+        >更新至{{ latest_plot }}集<i class="iconfont icon-ziyuan"></i
       ></span>
     </div>
-    <div class="plot-list-wrapper f-fg-1 flex f-ai-fe">
-      <div class="plot-items-container flex">
+    <div class="plot-list-wrapper f-fg-1 flex" ref="plotListWrapper">
+      <div
+        class="plot-items-container flex f-w-w"
+        v-childHeight="'plotItemHeight'"
+      >
         <div
           class="plot-item flex f-ai-c f-jc-c f-fixed"
           v-for="(item, index) of latest_plot"
+          v-height="'plotItemHeight'"
           :key="item"
           :class="index === active_index ? 'choose' : ''"
           @click="handleClickPlotItem(index)"
@@ -23,7 +27,6 @@
 </template>
 
 <script>
-import BScroll from "better-scroll";
 export default {
   name: "PlotListComponent",
   props: {
@@ -38,14 +41,14 @@ export default {
   },
   data() {
     return {
+      plotItemHeight: 0,
       active_index: this.watching_plot - 1
     };
   },
   mounted() {
-    this.bScroll = new BScroll(".plot-list-wrapper", {
-      scrollX: true,
-      click: true
-    });
+    let plotItemHeight = Math.ceil((this.plotItemHeight * 9) / 7);
+    let scrollHeight = (Math.ceil(this.watching_plot / 5) - 4) * plotItemHeight;
+    this.$refs.plotListWrapper.scrollTo(0, scrollHeight);
   },
   methods: {
     handleClickPlotItem(index) {
@@ -63,7 +66,6 @@ export default {
   border-bottom: 5px solid #2a314d;
   padding: 25px 10px 35px 10px;
   width: 375px;
-  height: 140px;
 
   .title-wrapper {
     width: 100%;
@@ -84,13 +86,14 @@ export default {
   .plot-list-wrapper {
     position: relative;
     width: 100%;
-    height: 40px;
-    overflow: hidden;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     .plot-items-container {
       position: absolute;
-      height: 34px;
       .plot-item {
-        margin-right: 10px;
+        margin-top: 10px;
+        margin-right: 11px;
         width: 60px;
         height: 35px;
         border-radius: 5px;

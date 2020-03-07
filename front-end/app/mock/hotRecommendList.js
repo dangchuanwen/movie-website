@@ -1,5 +1,7 @@
 const list = [
   {
+    id: 2,
+    belong: "comic",
     link_url: "",
     poster_main_color: "#0775aa",
     is_most_hot: true,
@@ -10,6 +12,8 @@ const list = [
     director_name: "格恩迪"
   },
   {
+    id: 2,
+    belong: "comic",
     link_url: "",
     poster_main_color: "#0775aa",
     is_most_hot: false,
@@ -20,6 +24,8 @@ const list = [
     director_name: "格恩迪"
   },
   {
+    id: 2,
+    belong: "comic",
     link_url: "",
     poster_main_color: "#0775aa",
     is_most_hot: false,

@@ -1,5 +1,5 @@
 <template>
-  <div class="plot-module">
+  <div class="plot-module" v-if="ifShow">
     <plot-list
       v-if="program_info.fragment_number"
       :latest_plot="program_info.fragment_number"
@@ -18,16 +18,20 @@ export default {
     PlotList
   },
   computed: {
+    ifShow() {
+      return this.program_info && this.program_info.fragment_number > 1;
+    },
     ...mapState({
       program_info: state => state.video.video_module.program_info
     })
   },
   methods: {
     ...mapActions({
-      getProgramInfo: "video/video_module/getProgramInfo"
+      getProgramInfo: "video/video_module/getProgramInfo",
+      getOneOfTvPlayProgramInfo: "video/video_module/getOneOfTvPlayProgramInfo"
     }),
     handleClickPlotItem(plot) {
-      this.getProgramInfo({ ...this.program_info, plot });
+      this.getOneOfTvPlayProgramInfo({ ...this.program_info, plot });
     }
   }
 };

@@ -3,7 +3,7 @@
     <video-container-component
       v-if="program.src"
       :src="program.src"
-      :poster="program.poster"
+      :poster="program.poster_url"
     ></video-container-component>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
     })
   },
   mounted() {
-    this.getProgramInfo();
+    const { id, belong } = this.$route.query;
+    this.getProgramInfo({ id, belong });
   },
   methods: {
     ...mapActions({

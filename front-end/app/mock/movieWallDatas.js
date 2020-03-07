@@ -1,5 +1,7 @@
 let datas = [
   {
+    id: 2,
+    belong: "movie",
     program_score: Math.random(10) * 10,
     link_url: "",
     name: "中国机长",
@@ -9,6 +11,7 @@ let datas = [
 ];
 
 for (let i = 0; i < 10; i++) {
+  datas[0].id = i;
   datas.push(datas[0]);
 }
 
