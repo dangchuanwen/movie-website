@@ -3,7 +3,7 @@ let datas = [
     id: 2,
     belong: "movie",
     program_score: Math.random(10) * 10,
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     name: "中国机长",
     poster_url:
       "https://p.ssl.qhimg.com/d/dy_8256348c102f6662b463b0f2b59ddff1.jpg"

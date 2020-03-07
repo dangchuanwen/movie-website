@@ -2,7 +2,7 @@ const hot_list = [
   {
     id: 2,
     belong: "comic",
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     poster_url:
       "http://img5.imgtn.bdimg.com/it/u=1325682741,20284808&fm=26&gp=0.jpg",
     name: "精灵旅社2",
@@ -13,7 +13,7 @@ const hot_list = [
   {
     id: 2,
     belong: "comic",
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     poster_url:
       "http://img5.imgtn.bdimg.com/it/u=107632766,3677925441&fm=26&gp=0.jpg",
     name: "神偷奶爸",

@@ -2,7 +2,7 @@ const list = [
   {
     id: 2,
     belong: "comic",
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     poster_main_color: "#0775aa",
     is_most_hot: true,
     name: "驯龙高手3",
@@ -14,7 +14,7 @@ const list = [
   {
     id: 2,
     belong: "comic",
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     poster_main_color: "#0775aa",
     is_most_hot: false,
     is_very_hot: false,
@@ -26,7 +26,7 @@ const list = [
   {
     id: 2,
     belong: "comic",
-    link_url: "",
+    link_url: "/video?id=1&belong=comic",
     poster_main_color: "#0775aa",
     is_most_hot: false,
     is_very_hot: true,
