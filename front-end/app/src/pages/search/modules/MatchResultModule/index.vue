@@ -28,7 +28,8 @@ export default {
   mounted() {},
   methods: {
     handleClickItem(val) {
-      console.log(val);
+      let key_word = val.name;
+      this.$router.push({ path: "searchResult", query: { key_word } });
     }
   }
 };

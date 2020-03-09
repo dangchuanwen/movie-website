@@ -33,7 +33,7 @@ export default {
       getRecommendList: "search/recommend_module/getRecommendList"
     }),
     handleClickItem(val) {
-      console.log(val);
+      this.$router.push({ path: "searchResult", query: { key_word: val } });
     }
   }
 };

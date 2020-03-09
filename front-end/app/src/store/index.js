@@ -7,6 +7,7 @@ import classification from "@/pages/classification/store";
 import home from "@/pages/home/store";
 import history from "@/pages/history/store";
 import video from "@/pages/video/store";
+import search_result from "@/pages/searchResult/store";
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     classification,
     home,
     history,
-    video
+    video,
+    search_result
   }
 });

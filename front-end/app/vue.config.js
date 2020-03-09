@@ -1,6 +1,10 @@
+const debug = process.env.NODE_ENV !== "production";
 module.exports = {
-  configureWebpack: {
-    performance: false
+  configureWebpack: config => {
+    if (debug) {
+      console.log("设置source-map");
+      config.devtool = "source-map";
+    }
   },
   css: {
     loaderOptions: {

@@ -41,15 +41,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: "/home",
-  //   component: HomePage,
-  //   alias: "/"
-  // },
-  // {
-  //   path: "/classification/:program_type",
-  //   component: ClassificationPage
-  // },
   {
     path: "/search",
     component: SearchPage
@@ -61,6 +52,10 @@ const routes = [
   {
     path: "/video",
     component: () => import("@/pages/video")
+  },
+  {
+    path: "/searchResult",
+    component: () => import("@/pages/searchResult")
   }
 ];
 

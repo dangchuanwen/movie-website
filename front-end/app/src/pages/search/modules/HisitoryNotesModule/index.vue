@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     handleClickItem(history) {
-      console.log(history);
+      this.$router.push({ path: "searchResult", query: { key_word: history } });
     },
     handleClickClear() {
       local_storage.setSearchHistoryList([]);
