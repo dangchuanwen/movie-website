@@ -11,6 +11,7 @@ function mergeSeriesQuery(results, query) {
   return Promise.all(promises_store);
 }
 async function queryCustomDatas(table) {
+  // 返回自定义表的数据, 表中必须有 tabl_name 字段
   const sql = `select * from ${table}`;
   let list = await this.query(sql);
 
@@ -26,6 +27,10 @@ async function queryCustomDatas(table) {
     delete result[0].poster_url;
     delete list[index].id;
     Object.assign(list[index], result[0]);
+    // 添加 belong 和 link_url 字段
+    const item = list[index];
+    item.belong = item.table_name;
+    item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
   });
   return Promise.resolve(list);
 }

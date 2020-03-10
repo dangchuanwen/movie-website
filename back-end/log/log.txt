@@ -93,3 +93,113 @@ ER_BAD_FIELD_ERROR: Unknown column 'publish_area' in 'where clause', the error s
                  id > 0 
                  limit 10
                  Sat Feb 22 2020 13:10:28 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%undefined%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:55:22 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%undefined%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:56:34 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:57:04 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:57:33 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:58:00 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 21:59:38 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 22:00:38 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 22:01:46 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like 'undefined' and
+                 program_area like 'all' and
+                 id > undefined 
+                 limit undefined
+                 Tue Mar 10 2020 22:03:14 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like '%' and
+                 program_area like '%' and
+                 id > 0 
+                 limit 10
+                 Tue Mar 10 2020 22:04:58 GMT+0800 (GMT+08:00)
+ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 
+                 program_type='all' and
+                 program_classifi' at line 1, the error sql is: select * from  where 
+                 program_type='all' and
+                 program_classification like '%%%' and
+                 release_year like '%' and
+                 program_area like '%' and
+                 id > 0 
+                 limit 10
+                 Tue Mar 10 2020 22:10:29 GMT+0800 (GMT+08:00)

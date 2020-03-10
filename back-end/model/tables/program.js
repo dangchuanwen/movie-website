@@ -18,17 +18,24 @@ class Program extends Mysql {
   constructor() {
     super(config);
   }
-  async getProgramWallDatas({ program_type, program_classification, publish_year, publish_area, last_id, num }) {
+  async getProgramWallDatas({ program_type, program_classification, release_year, publish_area, last_id, num }) {
     const table_name = getTableName(program_type);
     const sql = `select * from ${ table_name } where 
                  program_type='${program_type}' and
                  program_classification like '%${ filter(program_classification) }%' and
-                 release_year like '${ publish_year }' and
-                 program_area like '${ publish_area }' and
+                 release_year like '${ filter(release_year) }' and
+                 program_area like '${ filter(publish_area) }' and
                  id > ${ last_id } 
                  limit ${num}
                 `;
     const results = await this.query(sql);
+    // 为每条数据添加 link_url 和 belong 字段
+    if (results && results.length > 1) {
+      results.forEach(item => {
+        item.belong = table_name;
+        item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
+      });
+    }
     return Promise.resolve(results);
   }
   async searchProgram(key_word) {
@@ -59,6 +66,14 @@ class Program extends Mysql {
   async getProgramInfo(id, type) {
     const sql = `select * from ${ type } where id=${id} limit 1`;
     const result = await this.query(sql);
+    if (result && result.length > 0) {
+      // 添加 src, belong, type属性
+      result.forEach(item => {
+        item.src = item.m3u8_link;
+        item.type = item.program_type;
+        item.belong = type;
+      });
+    }
     return Promise.resolve(result);
   }
 }

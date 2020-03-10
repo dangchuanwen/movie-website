@@ -22,6 +22,10 @@ class WatchNotes extends Mysql {
       concurrentQueryResults.forEach((result, index) => {
         delete list[index].id;
         Object.assign(list[index], result[0]);
+        // 添加belong 和 link_url 字段
+        const item = list[index];
+        item.belong = item.table_name;
+        item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
       });
       return Promise.resolve(list);
     } else {
@@ -62,6 +66,15 @@ class WatchNotes extends Mysql {
       let datas = [];
       for (let key of Object.keys(map).sort((a, b) => b - a)) {
         const date = key.slice(4);
+        // 添加 belong, link_url, progress属性
+        const list = map[key];
+        if (list && list.length > 0) {
+          list.forEach(item => {
+            item.belong = item.table_name;
+            item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
+            item.progress = (item.watch_time_length / item.time_length).toFixed(2);
+          });
+        }
         datas.push({
           date,
           list: map[key]

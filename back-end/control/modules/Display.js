@@ -28,7 +28,7 @@ async function programWallDatas(ctx) {
   const datas = await PROGRAM.getProgramWallDatas({
     program_type,
     program_classification,
-    publish_year,
+    release_year: publish_year,
     publish_area,
     last_id,
     num

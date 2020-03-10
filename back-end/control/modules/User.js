@@ -31,13 +31,19 @@ async function login(ctx) {
 }
 
 async function watchHistory(ctx) {
-  const token = ctx.cookies.get("token");
+  let token = ctx.cookies.get("token");
+  if (!token) {
+    token = 'dd';
+  } 
   const datas = await WatchNotes.getLatestWeekNotes(token);
   ctx.body = Response(datas);
 }
 
 async function allWatchHistory(ctx) {
   let token = "dd";
+  if (!token) {
+    token = 'dd';
+  } 
   const datas = await WatchNotes.getAllWatchNotes(token);
   ctx.body = Response(datas);
 }
