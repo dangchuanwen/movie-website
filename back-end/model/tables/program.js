@@ -63,6 +63,7 @@ class Program extends Mysql {
     });
     return Promise.resolve(datas);
   }
+
   async getProgramInfo(id, type) {
     const sql = `select * from ${ type } where id=${id} limit 1`;
     const result = await this.query(sql);
@@ -74,6 +75,22 @@ class Program extends Mysql {
         item.belong = type;
       });
     }
+    return Promise.resolve(result);
+  }
+
+  async getOnePlotProgramInfo(belong, name, plot) {
+    const sql = `select * from ${ belong } where name='${ name }' and fragment_order=${plot} limit 1`;
+    
+    const result = await this.query(sql);
+    if (result && result.length > 0) {
+      // 添加src, belong, type属性
+      result.forEach(item => {
+        item.src = item.m3u8_link;
+        item.type = item.program_type;
+        item.belong = belong;
+      });
+    }
+
     return Promise.resolve(result);
   }
 }

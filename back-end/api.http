@@ -1,1 +1,4 @@
-GET http://localhost:3001/api/watchHistoryNotes
+GET http://localhost:3001/api/tvPlayProgramInfo
+?belong=comic
+&name=凸变英雄LEAF
+&plot=2

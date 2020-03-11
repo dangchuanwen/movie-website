@@ -17,9 +17,16 @@ async function programInfo(ctx) {
   const datas = await program.getProgramInfo(id, type);
   ctx.body = Response(datas);
 }
+async function tvPlayProgramInfo(ctx) {
+  const { belong, name, plot  } = ctx.query;
+  const PROGRAM = require("../../model/tables/program");
+  const datas = await PROGRAM.getOnePlotProgramInfo(belong, name, plot);
+  ctx.body = Response(datas);
+}
 
 module.exports = {
   searchRecommend,
   searchProgram,
-  programInfo
+  programInfo,
+  tvPlayProgramInfo
 }
