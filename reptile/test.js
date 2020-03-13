@@ -1,5 +1,3 @@
 
-const s = `dqdq"dd'ddd`;
-
-let a = `${ s.replace(/("|')/, "’") }`;
-console.log(a)
+let str = `HD高清$`;
+console.log(str.match(/HD(.*)\$/))

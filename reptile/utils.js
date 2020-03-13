@@ -199,9 +199,21 @@ async function storePageDatas(url, program_type) {
   // 链接
   const INPUT_tags = Array.from($("div#play_1 input[name='copy_sel']"));
   INPUT_tags.forEach((input, index) => {
+    let language = $(input).next().text().match(/HD(.*)\$/);
     const m3u8_link = $(input).attr("value");
     const fragment_order = index + 1;
     const fragment_number = INPUT_tags.length;
+
+    if (language && language.length > 1) {
+      language = language[1];
+    } else {
+      language = "";
+    }
+
+    if (language === "高清") {
+      language = "";
+    }
+
 
     createSqlFile({
       name,
@@ -217,7 +229,8 @@ async function storePageDatas(url, program_type) {
       program_score,
       m3u8_link,
       fragment_order,
-      fragment_number
+      fragment_number,
+      language
     });
   });
 }

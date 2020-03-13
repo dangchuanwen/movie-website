@@ -3,7 +3,7 @@ const {
   getMovieDatasStart,
   getTvPlayDatasStart,
   getVarietyShowDatasStart
-} = require("./programs.js");
+} = require("./programs/programs.js");
 
 async function start() {
  await getMovieDatasStart();
