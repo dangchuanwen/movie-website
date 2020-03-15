@@ -28,7 +28,15 @@ class Program extends Mysql {
                  id > ${ last_id } 
                  limit ${num}
                 `;
-    const results = await this.query(sql);
+    let results = await this.query(sql);
+    // 名字相同，去重
+    let temp = [];
+    results.forEach(cur => {
+      if (temp.findIndex(item => item.name === cur.name) === -1) {
+        temp.push(cur);
+      }
+    });
+    results = temp;
     // 为每条数据添加 link_url 和 belong 字段
     if (results && results.length > 1) {
       results.forEach(item => {
@@ -43,7 +51,7 @@ class Program extends Mysql {
     let promises = [];
     let datas = [];
     tabs.forEach(tab => {
-      const sql = `select name from (select name from ${tab} where name like '%${key_word}%') temp group by name;`;
+      const sql = `select name from (select name from ${tab} where name like '%${key_word}%' limit 7) temp group by name;`;
       let promise = this.query(sql);
       promises.push(promise);
     });

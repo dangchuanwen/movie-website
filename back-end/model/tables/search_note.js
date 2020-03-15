@@ -5,6 +5,7 @@ class SearchNote extends Mysql {
   constructor() {
     super(config);
   }
+
   async getMostSearchNames() {
     let datas = [];
     const limit = 5;
@@ -14,6 +15,10 @@ class SearchNote extends Mysql {
       results.forEach(item => datas.push(item.name));
     }
     return Promise.resolve(datas);
+  }
+
+  async getSearchResult(key_word) {
+    //const sql = `select `
   }
 }
 

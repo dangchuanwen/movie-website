@@ -6,17 +6,20 @@ async function searchRecommend(ctx) {
   const datas = await searchNote.getMostSearchNames();
   ctx.body = Response(datas);
 }
+
 async function searchProgram(ctx) {
   const { key_word } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
   const datas = await PROGRAM.searchProgram(key_word);
   ctx.body = Response(datas);
 }
+
 async function programInfo(ctx) {
-  const { id, type } = ctx.query;
-  const datas = await program.getProgramInfo(id, type);
+  const { id, belong } = ctx.query;
+  const datas = await program.getProgramInfo(id, belong);
   ctx.body = Response(datas);
 }
+
 async function tvPlayProgramInfo(ctx) {
   const { belong, name, plot  } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
@@ -24,9 +27,14 @@ async function tvPlayProgramInfo(ctx) {
   ctx.body = Response(datas);
 }
 
+async function searchResult(ctx) {
+  ctx.body = "搜索结果";
+}
+
 module.exports = {
   searchRecommend,
   searchProgram,
   programInfo,
-  tvPlayProgramInfo
+  tvPlayProgramInfo,
+  searchResult
 }

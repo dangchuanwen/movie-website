@@ -17,8 +17,8 @@ async function queryCustomDatas(table) {
 
   let promises_store = mergeSeriesQuery(list, (result) => {
     // 二次查询
-    const { program_id, table_name } = result;
-    const sql = `select * from ${ table_name } where id=${ program_id } limit 1`;
+    const { program_id } = result;
+    const sql = `select * from list where id=${ program_id } limit 1`;
     return this.query(sql);
   });
 
@@ -30,7 +30,7 @@ async function queryCustomDatas(table) {
     // 添加 belong 和 link_url 字段
     const item = list[index];
     item.belong = item.table_name;
-    item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
+    item.link_url = `/video?id=${item.id}`;
   });
   return Promise.resolve(list);
 }

@@ -203,3 +203,9 @@ ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corr
                  id > 0 
                  limit 10
                  Tue Mar 10 2020 22:10:29 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=65 limit 1 Wed Mar 11 2020 16:06:00 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=2 limit 1 Wed Mar 11 2020 16:06:09 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=2 limit 1 Wed Mar 11 2020 16:06:48 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=2 limit 1 Wed Mar 11 2020 16:06:51 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=2 limit 1 Wed Mar 11 2020 16:06:59 GMT+0800 (GMT+08:00)
+ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where id=2 limit 1 Wed Mar 11 2020 16:07:54 GMT+0800 (GMT+08:00)
