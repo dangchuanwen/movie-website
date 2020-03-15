@@ -9,8 +9,23 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+function insert(sql) {
+  return new Promise((resolve) => {
+    const con = connection;
+    con.query(sql, function(error, results) {
+      if (error) {
+        console.log(error);
+        resolve(false);   
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
-  con: connection
+  con: connection,
+  insert
 }
 
 
