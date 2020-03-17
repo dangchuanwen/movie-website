@@ -8,6 +8,7 @@ class WatchNotes extends Mysql {
     super(config);
     this.table_name = "watch_notes";
   }
+
   async getLatestWeekNotes(token) {
     // 最近一周的观看记录
     const last_week_timestamp = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;
@@ -34,14 +35,15 @@ class WatchNotes extends Mysql {
       return Promise.resolve(false);
     }
   }
+
   async getAllWatchNotes(token) {
     // 全部的历史记录
     const sql = `select * from ${this.table_name} where token='${token}' order by id desc`;
     let list = await this.query(sql);
     if (list) {
       let concurrentQueryResults = await mergeSeriesQuery(list, result => {
-        const { program_id, table_name } = result;
-        const sql = `select * from ${ table_name } where id = ${program_id}`;
+        const { program_id } = result;
+        const sql = `select * from program where id = ${program_id}`;
         return this.query(sql);
       });
       concurrentQueryResults.forEach((result, index) => {
@@ -51,7 +53,8 @@ class WatchNotes extends Mysql {
         delete result[0].time_length;
         Object.assign(list[index], result[0]);
       });
-      // 将 timestamp 解析成日期，并创建 map, 日期为Key, Value为记录数组
+
+      // 将 timestamp 解析成日期，并创建 map, Key为日期, Value为某一天的所有记录
       let map = {};
       list.forEach(item => {
         const timestamp = Number(item.timestamp);
@@ -64,6 +67,7 @@ class WatchNotes extends Mysql {
         }
         map[key].push(item);
       });
+
       // 将 map 转换成 api 数据格式，然后返回
       let datas = [];
       for (let key of Object.keys(map).sort((a, b) => b - a)) {
@@ -72,8 +76,7 @@ class WatchNotes extends Mysql {
         const list = map[key];
         if (list && list.length > 0) {
           list.forEach(item => {
-            item.belong = item.table_name;
-            item.link_url = `/video?id=${item.id}&belong=${item.belong}`;
+            item.link_url = `/video?id=${item.id}`;
             item.progress = (item.watch_time_length / item.time_length).toFixed(2);
           });
         }

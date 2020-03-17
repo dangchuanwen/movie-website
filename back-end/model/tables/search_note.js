@@ -17,9 +17,6 @@ class SearchNote extends Mysql {
     return Promise.resolve(datas);
   }
 
-  async getSearchResult(key_word) {
-    //const sql = `select `
-  }
 }
 
 module.exports = new SearchNote();

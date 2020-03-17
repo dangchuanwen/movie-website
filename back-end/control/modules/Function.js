@@ -1,8 +1,7 @@
 const Response = require("../Response");
-const searchNote = require("../../model/tables/search_note");
-const program = require("../../model/tables/program");
 
 async function searchRecommend(ctx) {
+  const searchNote = require("../../model/tables/search_note");
   const datas = await searchNote.getMostSearchNames();
   ctx.body = Response(datas);
 }
@@ -15,20 +14,24 @@ async function searchProgram(ctx) {
 }
 
 async function programInfo(ctx) {
-  const { id, belong } = ctx.query;
-  const datas = await program.getProgramInfo(id, belong);
+  const { id } = ctx.query;
+  const program = require("../../model/tables/program");
+  const datas = await program.getProgramInfo(id);
   ctx.body = Response(datas);
 }
 
 async function tvPlayProgramInfo(ctx) {
-  const { belong, name, plot  } = ctx.query;
+  const { name, plot } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
-  const datas = await PROGRAM.getOnePlotProgramInfo(belong, name, plot);
+  const datas = await PROGRAM.getOnePlotProgramInfo(name, plot);
   ctx.body = Response(datas);
 }
 
 async function searchResult(ctx) {
-  ctx.body = "搜索结果";
+  const { key_word, last_id, num } = ctx.query;
+  const PROGRAM = require("../../model/tables/program");
+  const datas = await PROGRAM.getSearchResult({ key_word, last_id, num });
+  ctx.body = Response(datas);
 }
 
 module.exports = {
@@ -37,4 +40,4 @@ module.exports = {
   programInfo,
   tvPlayProgramInfo,
   searchResult
-}
+};
