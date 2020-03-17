@@ -219,3 +219,7 @@ ER_NO_SUCH_TABLE: Table 'movie.comic' doesn't exist, the error sql is: select na
 ER_NO_SUCH_TABLE: Table 'movie.variety_show' doesn't exist, the error sql is: select name from (select name from variety_show where name like '%精灵%' limit 7) temp group by name; Mon Mar 16 2020 19:53:34 GMT+0800 (GMT+08:00)
 ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where name='西部世界' and fragment_order=2 limit 1 Mon Mar 16 2020 22:07:08 GMT+0800 (GMT+08:00)
 ER_NO_SUCH_TABLE: Table 'movie.undefined' doesn't exist, the error sql is: select * from undefined where name='西部世界' and fragment_order=2 limit 1 Mon Mar 16 2020 22:07:52 GMT+0800 (GMT+08:00)
+ER_SP_UNDECLARED_VAR: Undeclared variable: undefined, the error sql is: select * from list where name like '%精灵女孩小卓玛%' and id > undefined order by id limit undefined Tue Mar 17 2020 10:39:17 GMT+0800 (GMT+08:00)
+ER_SP_UNDECLARED_VAR: Undeclared variable: undefined, the error sql is: select * from list where name like '%精灵女孩小卓玛%' and id > undefined order by id limit undefined Tue Mar 17 2020 10:39:22 GMT+0800 (GMT+08:00)
+ER_SP_UNDECLARED_VAR: Undeclared variable: undefined, the error sql is: select * from list where name like '%复仇者联盟%' and id > undefined order by id limit undefined Tue Mar 17 2020 10:39:53 GMT+0800 (GMT+08:00)
+ER_SP_UNDECLARED_VAR: Undeclared variable: undefined, the error sql is: select * from list where name like '%复仇者联盟%' and id > undefined order by id limit undefined Tue Mar 17 2020 10:42:10 GMT+0800 (GMT+08:00)

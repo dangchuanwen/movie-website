@@ -67,11 +67,19 @@ class Program extends Mysql {
     return Promise.resolve(result);
   }
 
-  async getOnePlotProgramInfo(name, plot) {
+  async getOnePlotProgramInfo(id, plot) {
+    let sql = `select name from program where id=${id} limit 1`; 
+    let result = await this.query(sql);
+    let name = "";
+    if (result && result.length > 0) {
+      name = result[0].name;
+    } else {
+      return [];
+    }
+
+    sql = `select * from program where name='${ name }' and fragment_order=${plot} limit 1`;
+    result = await this.query(sql);
     
-    const sql = `select * from program where name='${ name }' and fragment_order=${plot} limit 1`;
-    
-    const result = await this.query(sql);
     if (result && result.length > 0) {
       // 添加src, type属性
       result.forEach(item => {
@@ -86,6 +94,11 @@ class Program extends Mysql {
   async getSearchResult({ key_word, last_id, num }) {
     const sql = `select * from list where name like '%${key_word}%' and id > ${last_id} order by id limit ${num}`;
     const result = await this.query(sql);
+    if (result && result.length > 0) {
+      result.forEach(item => {
+        item.link_url = `/video?id=${item.id}`;
+      });
+    }
     return Promise.resolve(result);
   }
 }

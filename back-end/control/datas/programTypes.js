@@ -34,7 +34,7 @@ const datas = [
       {
         key: "publish_area",
         datas: [
-          { name: "全部类型" },
+          { name: "全部地区" },
           { name: "马来西亚" },
           { name: "香港" },
           { name: "韩国" },
@@ -56,7 +56,7 @@ const datas = [
       {
         key: "publish_year",
         datas: [
-          { name: "全部类型" },
+          { name: "全部年份" },
           { name: "2020" },
           { name: "2019" },
           { name: "2018" },
@@ -197,7 +197,7 @@ const datas = [
       {
         key: "publish_area",
         datas: [
-          { name: "全部类型" },
+          { name: "全部地区" },
           { name: "香港" },
           { name: "韩国" },
           { name: "西班牙" },
@@ -218,7 +218,7 @@ const datas = [
       {
         key: "publish_year",
         datas: [
-          { name: "全部类型" },
+          { name: "全部年份" },
           { name: "2020" },
           { name: "2019" },
           { name: "2018" },
@@ -291,7 +291,7 @@ const datas = [
       {
         key: "publish_area",
         datas: [
-          { name: "全部类型" },
+          { name: "全部地区" },
           { name: "马来西亚" },
           { name: "香港" },
           { name: "韩国" },
@@ -308,7 +308,7 @@ const datas = [
       {
         key: "publish_year",
         datas: [
-          { name: "全部类型" },
+          { name: "全部年份" },
           { name: "2020" },
           { name: "2019" },
           { name: "2018" },
@@ -355,7 +355,7 @@ const datas = [
       {
         key: "publish_area",
         datas: [
-          { name: "全部类型" },
+          { name: "全部地区" },
           { name: "马来西亚" },
           { name: "香港" },
           { name: "韩国" },
@@ -376,7 +376,7 @@ const datas = [
       {
         key: "publish_year",
         datas: [
-          { name: "全部类型" },
+          { name: "全部年份" },
           { name: "2020" },
           { name: "2019" },
           { name: "2018" },

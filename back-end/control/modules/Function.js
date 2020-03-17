@@ -21,9 +21,9 @@ async function programInfo(ctx) {
 }
 
 async function tvPlayProgramInfo(ctx) {
-  const { name, plot } = ctx.query;
+  const { id, plot } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
-  const datas = await PROGRAM.getOnePlotProgramInfo(name, plot);
+  const datas = await PROGRAM.getOnePlotProgramInfo(id, plot);
   ctx.body = Response(datas);
 }
 
