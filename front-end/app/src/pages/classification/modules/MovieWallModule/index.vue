@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
+import types from "./store/mutations-type";
 import Vue from "vue";
 import { InfiniteLoading } from "@nutui/nutui";
 InfiniteLoading.install(Vue);
@@ -52,21 +53,23 @@ export default {
   },
   computed: {
     ...mapState({
+      http_params_changed: state =>
+        state.classification.movie_wall_module.http_params_changed,
       movie_wall_datas: state =>
         state.classification.movie_wall_module.movie_wall_datas
     })
   },
-  mounted() {
-    this.initMovieWallDatas().then(
-      () => {
-        this.requested = true;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  watch: {
+    http_params_changed() {},
+    movie_wall_datas() {
+      this.requested = true;
+    }
   },
+  mounted() {},
   methods: {
+    ...mapMutations({
+      updateHttpParams: `classification/movie_wall_module/${types.UPDATE_HTTP_PARAMS}`
+    }),
     ...mapActions({
       initMovieWallDatas: "classification/movie_wall_module/initMovieWallDatas",
       loadMoreMovieWallDatas:

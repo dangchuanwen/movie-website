@@ -17,7 +17,7 @@ export default {
 <style scoped lang="less">
 .search-result-page {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: #1d2031;
 }
 </style>

@@ -1,24 +1,43 @@
 <template>
-  <div
-    class="match-result-module-wrapper flex f-w-w"
-    v-if="search_result && search_result.length > 0"
-  >
-    <match-item-component
-      class="match-item-wrapper"
-      v-for="item of search_result"
-      :program="item"
-      :key="`${item.id}${item.name}`"
-    ></match-item-component>
+  <div class="match-result-module-wrapper">
+    <nut-infiniteloading
+      class="item-container flex f-w-w"
+      v-if="search_result && search_result.length > 0"
+      @loadmore="onInfinite"
+      :is-show-mod="true"
+      :has-more="true"
+      :threshold="200"
+    >
+      <match-item-component
+        class="match-item-wrapper f-fixed"
+        v-for="item of search_result"
+        :program="item"
+        :key="`${item.id}${item.name}`"
+      ></match-item-component>
+    </nut-infiniteloading>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import Vue from "vue";
+import { InfiniteLoading } from "@nutui/nutui";
+InfiniteLoading.install(Vue);
+import types from "./store/mutation-types";
+import { mapState, mapActions, mapMutations } from "vuex";
 import MatchItemComponent from "./components/MatchItem";
 export default {
   name: "MatchResultModule",
   components: {
     MatchItemComponent
+  },
+  data() {
+    return {
+      key_word: "",
+      loadTimer: null
+    };
+  },
+  beforeDestroy() {
+    clearTimeout(this.loadTimer);
   },
   computed: {
     ...mapState({
@@ -26,12 +45,27 @@ export default {
     })
   },
   methods: {
+    onInfinite() {
+      clearTimeout(this.loadTimer);
+      this.loadTimer = setTimeout(() => {
+        this.getMoreSearchResultList(this.key_word);
+      }, 200);
+    },
+    ...mapMutations({
+      clearDatas: `search_result/search_result/${types.SET_SEARCH_RESULT_LIST}`
+    }),
     ...mapActions({
+      getMoreSearchResultList:
+        "search_result/search_result/getMoreSearchResultList",
       getSearchResultList: "search_result/search_result/getSearchResultList"
     })
   },
   mounted() {
+    // 清空数据，last_id 为 0
+    this.clearDatas([]);
+
     const { key_word } = this.$route.query;
+    this.key_word = key_word;
     this.getSearchResultList(key_word);
   }
 };
@@ -43,17 +77,18 @@ export default {
   margin: auto;
   padding: 1vh 0;
   width: 94vw;
-  height: 98vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  .match-item-wrapper {
-    margin-top: 15px;
-  }
-  .match-item-wrapper:nth-child(3n + 1) {
-    margin-right: 2vw;
-  }
-  .match-item-wrapper:nth-child(3n + 2) {
-    margin-right: 2vw;
+  overflow: hidden;
+  .item-container {
+    width: 100%;
+    .match-item-wrapper {
+      margin-top: 15px;
+    }
+    .match-item-wrapper:nth-child(3n + 1) {
+      margin-right: 2vw;
+    }
+    .match-item-wrapper:nth-child(3n + 2) {
+      margin-right: 2vw;
+    }
   }
 }
 </style>

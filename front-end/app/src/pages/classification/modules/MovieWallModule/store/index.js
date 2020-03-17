@@ -2,6 +2,7 @@ import types from "./mutations-type.js";
 import request from "@/utils/request";
 
 const state = {
+  http_params_changed: false, // 如果参数改变，这个值立马改变，从而达到监听参数改变
   movie_wall_datas: [],
   http_params: {
     last_id: 0, //最后一个数据的 id
@@ -16,17 +17,33 @@ const state = {
 const mutations = {
   [types.SET_MOVIE_WALL_DATAS](state, new_datas) {
     state.movie_wall_datas = new_datas;
+    if (new_datas.length === 0) {
+      state.http_params.last_id = 0;
+    } else {
+      state.http_params.last_id = new_datas[new_datas.length - 1].id;
+    }
   },
   [types.ADD_MOVIE_WALL_DATAS](state, new_datas) {
-    state.movie_wall_datas.push(...new_datas);
+    this.commit(
+      `classification/movie_wall_module/${types.SET_MOVIE_WALL_DATAS}`,
+      [...state.movie_wall_datas, ...new_datas]
+    );
   },
   [types.UPDATE_HTTP_PARAMS](state, { key, value }) {
-    state.http_params[key] = value;
-    const { movie_wall_datas } = state;
-    if (movie_wall_datas.length > 0) {
-      state.http_params.last_id =
-        movie_wall_datas[movie_wall_datas.length - 1].id;
+    state.http_params_changed = !state.http_params_changed;
+    // 将数据置空
+    this.commit(
+      `classification/movie_wall_module/${types.SET_MOVIE_WALL_DATAS}`,
+      []
+    );
+    if (/全部/g.test(value)) {
+      state.http_params[key] = "all";
+    } else {
+      state.http_params[key] = value;
     }
+    // 每次都要更新 last_id 为0
+    state.http_params.last_id = 0;
+    this.dispatch("classification/movie_wall_module/initMovieWallDatas");
   }
 };
 
@@ -42,6 +59,7 @@ const actions = {
     });
   },
   async initMovieWallDatas({ commit, dispatch }) {
+    // 初始化 last_id = 0
     let data = await dispatch("getMovieWallDatas");
     return new Promise((resolve, reject) => {
       if (data && data.data && data.data.datas) {

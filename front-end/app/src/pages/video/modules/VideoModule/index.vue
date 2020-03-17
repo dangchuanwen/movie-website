@@ -24,13 +24,21 @@ export default {
       program: state => state.video.video_module.program_info
     })
   },
+  watch: {
+    $route() {
+      this.getProgramInfo();
+    }
+  },
   mounted() {
-    const { id, belong } = this.$route.query;
-    this.getProgramInfo({ id, belong });
+    this.getProgramInfo();
   },
   methods: {
+    getProgramInfo() {
+      const { id, plot } = this.$route.query;
+      this.getOneOfTvPlayProgramInfo({ id, plot: plot ? plot : 1 });
+    },
     ...mapActions({
-      getProgramInfo: "video/video_module/getProgramInfo"
+      getOneOfTvPlayProgramInfo: "video/video_module/getOneOfTvPlayProgramInfo"
     })
   }
 };

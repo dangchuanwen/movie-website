@@ -11,31 +11,29 @@ const mutations = {
 };
 
 const actions = {
-  async getOneOfTvPlayProgramInfo({ commit }, { belong, name, plot }) {
+  async getOneOfTvPlayProgramInfo({ commit }, { id, plot }) {
     let data = await request({
       method: "get",
       url: "/api/tvPlayProgramInfo",
       params: {
-        belong,
-        name,
+        id,
         plot
       }
     });
     if (data && data.data && data.data.datas) {
-      commit(types.SET_PROGRAM_INFO, data.data.datas);
+      commit(types.SET_PROGRAM_INFO, data.data.datas[0]);
     }
   },
-  async getProgramInfo({ commit }, { id, belong }) {
+  async getProgramInfo({ commit }, { id }) {
     let data = await request({
       method: "get",
       url: "/api/programInfo",
       params: {
-        id,
-        belong
+        id
       }
     });
     if (data && data.data && data.data.datas) {
-      commit(types.SET_PROGRAM_INFO, data.data.datas);
+      commit(types.SET_PROGRAM_INFO, data.data.datas[0]);
     }
   }
 };

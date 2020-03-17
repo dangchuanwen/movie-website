@@ -7,7 +7,6 @@ const state = {
 const mutations = {
   [types.UPDATE_CLASSIFICATION](state, classifications) {
     state.classification_datas = classifications;
-    console.log(classifications);
   }
 };
 

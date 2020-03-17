@@ -25,7 +25,7 @@ export default {
 .match-item-wrapper {
   width: 30vw;
   height: 160px;
-
+  overflow: hidden;
   .poster-wrapper {
     width: 100%;
     height: 135px;

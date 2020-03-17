@@ -27,11 +27,18 @@ export default {
   },
   methods: {
     ...mapActions({
-      getProgramInfo: "video/video_module/getProgramInfo",
       getOneOfTvPlayProgramInfo: "video/video_module/getOneOfTvPlayProgramInfo"
     }),
     handleClickPlotItem(plot) {
-      this.getOneOfTvPlayProgramInfo({ ...this.program_info, plot });
+      const { path } = this.$route;
+      const { id } = this.$route.query;
+      this.$router.replace({
+        path: path,
+        query: {
+          id,
+          plot
+        }
+      });
     }
   }
 };

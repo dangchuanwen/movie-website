@@ -11,10 +11,13 @@ const mutations = {
 };
 
 const actions = {
-  async getSearchMatchResult({ commit } /* key_word */) {
+  async getSearchMatchResult({ commit }, key_word) {
     const res = await request({
       method: "get",
-      url: "/api/searchMatchResult"
+      url: "/api/searchMatchResult",
+      params: {
+        key_word
+      }
     });
     if (res && res.data && res.data.datas) {
       commit(types.SET_MATCH_RESULT, res.data.datas);

@@ -24,7 +24,8 @@ export default {
   },
   data() {
     return {
-      key_word: ""
+      key_word: "",
+      searchTimer: null
     };
   },
   mounted() {},
@@ -39,16 +40,19 @@ export default {
       this.$router.go(-1);
     },
     handleSearch() {
-      console.log("搜索");
       const key_word = this.key_word.trim();
       if (key_word) {
         local_storage.addSearchHistory(key_word);
+        this.getSearchMatchResult(key_word);
       }
     },
     handleInput(val) {
       this.key_word = val;
       this.setKeyWord(val);
-      this.getSearchMatchResult(val);
+      clearTimeout(this.searchTimer);
+      this.searchTimer = setTimeout(() => {
+        this.handleSearch();
+      }, 500);
     }
   },
   beforeDestroy() {

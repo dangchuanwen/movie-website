@@ -56,12 +56,14 @@ export default {
         item => item.name === program_type
       );
       if (index !== -1) {
-        this.activeIndex = index;
+        // 待优化
         // 参数合理，修改 http 请求参数
         this.updateHttpParams({
           key: "program_type",
           value: program_type
         });
+        this.updateClassification(program_type);
+        this.activeIndex = index;
       } else {
         this.activeIndex = 0;
       }
@@ -75,7 +77,6 @@ export default {
         "classification/program_type_module/getProgramTypesList"
     }),
     handleClickTab(val) {
-      this.updateClassification(val);
       this.$router.push({
         params: { program_type: val }
       });
