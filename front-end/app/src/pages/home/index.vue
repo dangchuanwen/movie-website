@@ -4,7 +4,7 @@
       <search-module></search-module>
       <banner-module></banner-module>
       <program-bar-module></program-bar-module>
-      <watch-history-module></watch-history-module>
+      <watch-history-module v-if="ifHaveHistoryNote"></watch-history-module>
       <hot-module v-if="!ifHaveHistoryNote"></hot-module>
       <recommend-module></recommend-module>
     </div>

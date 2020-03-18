@@ -1,5 +1,6 @@
 const debug = process.env.NODE_ENV !== "production";
 module.exports = {
+  publicPath: "./",
   configureWebpack: config => {
     if (debug) {
       console.log("设置source-map");

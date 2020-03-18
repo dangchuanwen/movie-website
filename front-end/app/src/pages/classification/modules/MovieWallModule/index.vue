@@ -4,8 +4,8 @@
       <nut-infiniteloading
         @loadmore="onInfinite"
         :is-show-mod="true"
-        :has-more="isHasMore"
-        :is-loading="isLoading"
+        :has-more="true"
+        :is-loading="false"
         :threshold="200"
       >
         <div class="movie-wall-wrappr flex f-w-w">
@@ -84,10 +84,9 @@ export default {
             this.isLoading = false;
             this.isHasMore = isHasMore;
           },
-          err => {
+          () => {
             this.isLoading = false;
             this.isHasMore = false;
-            console.log(err);
           }
         );
       }, 100);

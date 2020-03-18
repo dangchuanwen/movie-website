@@ -1,4 +1,5 @@
 import { getExpressionArray } from "@/utils/util";
+import { login } from "@/utils/user";
 export const domWidth = {
   install(Vue) {
     Vue.directive("width", {
@@ -19,6 +20,7 @@ export const domWidth = {
         }
       }
     });
+
     Vue.directive("height", {
       // usage: v-height:callback = "表达式(obj.person.name)"
       inserted(el, binding, vnode) {
@@ -37,6 +39,7 @@ export const domWidth = {
         }
       }
     });
+
     Vue.directive("childHeight", {
       // usage: v-childHeight:callback = "表达式(obj.person.name)"
       inserted(el, binding, vnode) {
@@ -53,6 +56,12 @@ export const domWidth = {
         if (cb in vnode.context) {
           vnode.context[cb]();
         }
+      }
+    });
+
+    Vue.directive("login", {
+      inserted() {
+        login();
       }
     });
   }

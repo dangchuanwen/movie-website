@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view v-login></router-view>
   </div>
 </template>
 
