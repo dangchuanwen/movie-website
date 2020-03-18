@@ -11,7 +11,8 @@ class Program extends Mysql {
   }
 
   async getProgramWallDatas({ program_type, program_classification, release_year, publish_area, last_id, num }) {
-    const sql = `select * from list where 
+    const sql = `select * from list where
+                 is_show=1 and 
                  program_type='${program_type}' and
                  program_classification like '%${ filter(program_classification) }%' and
                  release_year like '${ filter(release_year) }' and
@@ -38,7 +39,7 @@ class Program extends Mysql {
     let datas = [];
     const likes = [`'${key_word}%'`, `'%${key_word}'`];
     likes.forEach(like => {
-      const sql = `select name from list where name like ${like} limit 10`;
+      const sql = `select name from list where is_show=1 and name like ${like} limit 10`;
       promises.push(this.query(sql));
     });
     let results = await Promise.all(promises);
