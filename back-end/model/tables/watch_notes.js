@@ -9,11 +9,43 @@ class WatchNotes extends Mysql {
     this.table_name = "watch_notes";
   }
 
+  async storeProgress({ currentTime, duration, id, token }) {
+    // 首先判断下 该用户是否看过这个节目
+    let saw = false;
+    let sql = `select count(*) as seeNum from watch_notes where program_id=${id} and token='${token}'`;
+    let result = await this.query(sql);
+
+    if (!result) {
+      return false;
+    }
+    if (result && result.length > 0) {
+      if (result[0].seeNum > 0) {
+        saw = true;
+      }
+    }
+
+    // 判断有没有看过
+    const timestamp = new Date().getTime();
+    if (saw) {
+      // 看过, 更新
+      sql = `update watch_notes 
+            set watch_time_length=${currentTime}, timestamp='${timestamp}' 
+            where program_id=${id} and token='${token}'`;
+    } else {
+      // 没看过，插入
+      sql = `insert into watch_notes (program_id, watch_time_length, time_length, token, timestamp) 
+            values(${id}, ${currentTime}, ${duration}, '${token}', '${timestamp}')`;
+    }
+
+    result = await this.query(sql);
+    return result ? {} : false;
+  }
+
   async getLatestWeekNotes(token) {
     // 最近一周的观看记录
     const last_week_timestamp = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;
     const sql = `select * from ${this.table_name} where token='${token}' and timestamp > ${last_week_timestamp}`;
-    
+
     let list = await this.query(sql);
     if (list) {
       let concurrentQueryResults = await mergeSeriesQuery(list, result => {
@@ -59,9 +91,10 @@ class WatchNotes extends Mysql {
       list.forEach(item => {
         const timestamp = Number(item.timestamp);
         const date = new Date(timestamp);
-        const form_date = `${ date.getFullYear() }.${ date.getMonth() + 1 }.${ date.getDate() }`;
+        const form_date = `${date.getFullYear()}.${date.getMonth() +
+          1}.${date.getDate()}`;
         // 加一个前缀 'date' 作为Key
-        const key = 'date' + form_date;
+        const key = "date" + form_date;
         if (!map[key]) {
           map[key] = [];
         }
@@ -77,7 +110,9 @@ class WatchNotes extends Mysql {
         if (list && list.length > 0) {
           list.forEach(item => {
             item.link_url = `/video?id=${item.id}`;
-            item.progress = (item.watch_time_length / item.time_length).toFixed(2);
+            item.progress = (item.watch_time_length / item.time_length).toFixed(
+              2
+            );
           });
         }
         datas.push({
@@ -85,7 +120,7 @@ class WatchNotes extends Mysql {
           list: map[key]
         });
       }
-      
+
       return Promise.resolve(datas);
     } else {
       return Promise.resolve(false);

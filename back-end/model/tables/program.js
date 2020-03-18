@@ -55,23 +55,11 @@ class Program extends Mysql {
     return Promise.resolve(datas);
   }
 
-  async getProgramInfo(id) {
-    const sql = `select * from program where id=${id} limit 1`;
-    const result = await this.query(sql);
-    if (result && result.length > 0) {
-      // 添加 src, belong, type属性
-      result.forEach(item => {
-        item.src = item.m3u8_link;
-        item.type = item.program_type;
-      });
-    }
-    return Promise.resolve(result);
-  }
-
-  async getOnePlotProgramInfo(id, plot) {
+  async getOnePlotProgramInfo({ id, plot, token }) {
     let sql = `select name from program where id=${id} limit 1`; 
     let result = await this.query(sql);
     let name = "";
+    let datas = [];
     if (result && result.length > 0) {
       name = result[0].name;
     } else {
@@ -79,17 +67,28 @@ class Program extends Mysql {
     }
 
     sql = `select * from program where name='${ name }' and fragment_order=${plot} limit 1`;
-    result = await this.query(sql);
-    
-    if (result && result.length > 0) {
-      // 添加src, type属性
-      result.forEach(item => {
-        item.src = item.m3u8_link;
-        item.type = item.program_type;
-      });
+    datas = result = await this.query(sql);
+    if (!result) {
+      return false;
     }
 
-    return Promise.resolve(result);
+    if (datas && datas.length > 0) {
+      // 添加src, type属性
+      const item = datas[0];
+      item.src = item.m3u8_link;
+      item.type = item.program_type;
+      // 查询用户是否观看以及观看时长
+      sql = `select * from watch_notes where token='${token}' and program_id=${item.id} `;
+      result = await this.query(sql);
+      if (result && result.length > 0) {
+        const currentTime = result[0].watch_time_length;
+        const duration = result[0].time_length;
+        item.currentTime = currentTime;
+        item.duration = duration;
+      }
+    } 
+
+    return Promise.resolve(datas);
   }
 
   async getSearchResult({ key_word, last_id, num }) {

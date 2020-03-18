@@ -1,7 +1,7 @@
 const Response = require("../Response");
-const User = require("../../model/tables/user");
-const WatchNotes = require("../../model/tables/watch_notes");
+
 async function login(ctx) {
+  const User = require("../../model/tables/user");
   const md5 = require("md5");
   const token = ctx.cookies.get("token");
   const user_agent = ctx.request.header['user-agent'];
@@ -31,7 +31,9 @@ async function login(ctx) {
 }
 
 async function watchHistory(ctx) {
+  const WatchNotes = require("../../model/tables/watch_notes");
   let token = ctx.cookies.get("token");
+
   if (!token) {
     token = 'dd';
   } 
@@ -40,7 +42,8 @@ async function watchHistory(ctx) {
 }
 
 async function allWatchHistory(ctx) {
-  let token = "dd";
+  const WatchNotes = require("../../model/tables/watch_notes");
+  let token = ctx.cookies.get("token");
   if (!token) {
     token = 'dd';
   } 
@@ -48,8 +51,20 @@ async function allWatchHistory(ctx) {
   ctx.body = Response(datas);
 }
 
+async function storeProgress(ctx) {
+  const WatchNotes = require("../../model/tables/watch_notes");
+  const { id, currentTime, duration } = ctx.query;
+  let token = ctx.cookies.get("token");
+  if (!token) {
+    token = 'dd';
+  }
+  const datas = await WatchNotes.storeProgress({ id, currentTime, duration, token });
+  ctx.body = Response(datas);
+}
+
 module.exports = {
   login,
   watchHistory,
-  allWatchHistory
+  allWatchHistory,
+  storeProgress
 }

@@ -13,17 +13,16 @@ async function searchProgram(ctx) {
   ctx.body = Response(datas);
 }
 
-async function programInfo(ctx) {
-  const { id } = ctx.query;
-  const program = require("../../model/tables/program");
-  const datas = await program.getProgramInfo(id);
-  ctx.body = Response(datas);
-}
 
 async function tvPlayProgramInfo(ctx) {
+  let token = ctx.cookies.get("token");
+  if (!token) {
+    token = "dd";
+  }
   const { id, plot } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
-  const datas = await PROGRAM.getOnePlotProgramInfo(id, plot);
+  const datas = await PROGRAM.getOnePlotProgramInfo({id, plot, token});
+
   ctx.body = Response(datas);
 }
 
@@ -37,7 +36,6 @@ async function searchResult(ctx) {
 module.exports = {
   searchRecommend,
   searchProgram,
-  programInfo,
   tvPlayProgramInfo,
   searchResult
 };
