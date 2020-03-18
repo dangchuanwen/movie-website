@@ -23,18 +23,6 @@ const actions = {
     if (data && data.data && data.data.datas) {
       commit(types.SET_PROGRAM_INFO, data.data.datas[0]);
     }
-  },
-  async getProgramInfo({ commit }, { id }) {
-    let data = await request({
-      method: "get",
-      url: "/api/programInfo",
-      params: {
-        id
-      }
-    });
-    if (data && data.data && data.data.datas) {
-      commit(types.SET_PROGRAM_INFO, data.data.datas[0]);
-    }
   }
 };
 

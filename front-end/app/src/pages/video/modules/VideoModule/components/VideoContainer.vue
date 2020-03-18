@@ -7,6 +7,7 @@
       :options="playerOptions"
       @waiting="handleWaiting"
       @playing="handlePlaying"
+      @timeupdate="handlePlayerTimeupdate($event)"
     />
     <loading-component
       class="loading-wrapper"
@@ -23,6 +24,10 @@ export default {
     LoadingComponent
   },
   props: {
+    currentTime: {
+      type: Number,
+      default: () => 0
+    },
     src: {
       type: String,
       default: () => ""
@@ -42,6 +47,9 @@ export default {
   },
   data() {
     return {
+      continued: this.currentTime > 0,
+      isGetCurrentTime: true,
+      currentTime_timer: null,
       waiting: false,
       playerOptions: {
         //controls: false,
@@ -71,8 +79,25 @@ export default {
       this.player = this.$refs.videoPlayer.player;
     }
   },
+  beforeDestroy() {
+    clearTimeout(this.currentTime_timer);
+  },
   methods: {
+    handlePlayerTimeupdate(player) {
+      if (this.isGetCurrentTime) {
+        this.isGetCurrentTime = false;
+        this.currentTime_timer = setTimeout(() => {
+          this.isGetCurrentTime = true;
+        }, 3000);
+        const { currentTime, duration } = player.cache_;
+        this.$emit("playerTimeUpdate", { currentTime, duration });
+      }
+    },
     handlePlaying() {
+      if (this.continued) {
+        this.continued = false;
+        this.player.currentTime(this.currentTime);
+      }
       this.waiting = false;
     },
     handleWaiting() {
