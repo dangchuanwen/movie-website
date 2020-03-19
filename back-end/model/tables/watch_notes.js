@@ -10,26 +10,22 @@ class WatchNotes extends Mysql {
   }
 
   async storeProgress({ currentTime, duration, id, token }) {
-    // 首先判断下 该用户是否看过这个节目
+    // 首先判断下 该用户是否看过这个节目, 判断 token and program_id 字段
     let saw = false;
-    let sql = `select count(*) as seeNum from watch_notes where program_id=${id} and token='${token}'`;
+    let sql = `select id from watch_notes 
+              where token='${token}' 
+              and program_id=${id}`;
     let result = await this.query(sql);
-
-    if (!result) {
-      return false;
-    }
     if (result && result.length > 0) {
-      if (result[0].seeNum > 0) {
-        saw = true;
-      }
+      saw = true;
     }
-
-    // 判断有没有看过
     const timestamp = new Date().getTime();
+    // 判断有没有看过
     if (saw) {
       // 看过, 更新
       sql = `update watch_notes 
-            set watch_time_length=${currentTime}, timestamp='${timestamp}' 
+            set watch_time_length=${currentTime}, 
+                timestamp='${timestamp}'  
             where program_id=${id} and token='${token}'`;
     } else {
       // 没看过，插入
@@ -62,6 +58,7 @@ class WatchNotes extends Mysql {
         item.link_url = `/video?id=${item.id}`;
       });
 
+      // 去重，除去名字相同的
       return Promise.resolve(list);
     } else {
       return Promise.resolve(false);

@@ -19,9 +19,9 @@ async function tvPlayProgramInfo(ctx) {
   if (!token) {
     token = "dd";
   }
-  const { id, plot } = ctx.query;
+  const { id } = ctx.query;
   const PROGRAM = require("../../model/tables/program");
-  const datas = await PROGRAM.getOnePlotProgramInfo({id, plot, token});
+  const datas = await PROGRAM.getOnePlotProgramInfo({id, token});
 
   ctx.body = Response(datas);
 }
@@ -33,9 +33,17 @@ async function searchResult(ctx) {
   ctx.body = Response(datas);
 }
 
+async function updateProgramId(ctx) {
+  const { id, plot, language } = ctx.query;
+  const PROGRAM = require("../../model/tables/program");
+  const datas = await PROGRAM.getRealId({id, plot, language});
+  ctx.body = Response(datas);
+}
+
 module.exports = {
   searchRecommend,
   searchProgram,
   tvPlayProgramInfo,
-  searchResult
+  searchResult,
+  updateProgramId
 };

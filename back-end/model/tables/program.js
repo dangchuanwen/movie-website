@@ -55,28 +55,43 @@ class Program extends Mysql {
     return Promise.resolve(datas);
   }
 
-  async getOnePlotProgramInfo({ id, plot, token }) {
-    let sql = `select name from program where id=${id} limit 1`; 
-    let result = await this.query(sql);
-    let name = "";
+  async getOnePlotProgramInfo({ id, token }) {
     let datas = [];
-    if (result && result.length > 0) {
-      name = result[0].name;
-    } else {
-      return [];
-    }
-
-    sql = `select * from program where name='${ name }' and fragment_order=${plot} limit 1`;
-    datas = result = await this.query(sql);
+    let sql = `select * from program where id=${id}`;
+    let result = await this.query(sql);
+    datas = result;
     if (!result) {
       return false;
     }
 
     if (datas && datas.length > 0) {
+
       // 添加src, type属性
       const item = datas[0];
       item.src = item.m3u8_link;
       item.type = item.program_type;
+      
+      // 添加 plots, languages属性
+      let plots = [];
+      let languages = [];
+      for (let i = 1; i <= item.fragment_number; i ++) {
+        plots.push(i);
+      }
+      if (item.language) {
+        // 查询所有的语言
+        sql = `select language from program where name='${item.name}' group by language order by id asc`;
+        result = await this.query(sql);
+        if (result && result.length > 0) {
+          result.forEach(row => {
+            if (row.language) {
+              languages.push(row.language);
+            }
+          });
+        }
+      }
+      item.plots = plots;
+      item.languages = languages;
+      
       // 查询用户是否观看以及观看时长
       sql = `select * from watch_notes where token='${token}' and program_id=${item.id} `;
       result = await this.query(sql);
@@ -86,6 +101,7 @@ class Program extends Mysql {
         item.currentTime = currentTime;
         item.duration = duration;
       }
+
     } 
 
     return Promise.resolve(datas[0]);
@@ -101,6 +117,34 @@ class Program extends Mysql {
     }
     return Promise.resolve(result);
   }
+
+  async getRealId({ id, plot, language }) {
+    // 先查询名字
+    let sql = `select name from program where id=${id}`;
+    let result = await this.query(sql);
+    if (result && result.length > 0) {
+      const name = result[0].name;
+      // 查询真实id, plot or language
+      if (plot) {
+        sql = `select id from program where name='${name}' and fragment_order=${plot} `;
+      } else if (language) {
+        sql = `select id from program where name='${name}' and language='${language}' `;
+      }
+      
+      result = await this.query(sql);
+      if (result && result.length > 0) {
+        return {
+          plot,
+          id: result[0].id
+        };
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
 }
 
 module.exports = new Program();

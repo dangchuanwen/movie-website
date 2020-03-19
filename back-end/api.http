@@ -1,3 +1,4 @@
-GET http://localhost:3001/api/tvPlayProgramInfo
-?id=185577
-&plot=1
+GET http://localhost:3001/api/storeProgress
+?id=222
+&currentTime=300
+&duration=500

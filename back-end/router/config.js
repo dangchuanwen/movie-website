@@ -1,7 +1,26 @@
-const { bannerList, hotRecommendList, hotList, programWallDatas } = require("../control/modules/Display");
+const {
+  bannerList,
+  hotRecommendList,
+  hotList,
+  programWallDatas
+} = require("../control/modules/Display");
+
 const { classification, programTypes } = require("../control/modules/Fixed");
-const { login, watchHistory, allWatchHistory, storeProgress } = require("../control/modules/User");
-const { searchRecommend, searchProgram, tvPlayProgramInfo, searchResult } = require("../control/modules/Function");
+
+const {
+  login,
+  watchHistory,
+  allWatchHistory,
+  storeProgress
+} = require("../control/modules/User");
+
+const {
+  searchRecommend,
+  searchProgram,
+  tvPlayProgramInfo,
+  searchResult,
+  updateProgramId
+} = require("../control/modules/Function");
 
 const config = {
   ["/api/bannerList"]: {
@@ -72,6 +91,11 @@ const config = {
   ["/api/storeProgress"]: {
     method: "get",
     handle: storeProgress
+  },
+
+  ["/api/updateProgramId"]: {
+    method: "get",
+    handle: updateProgramId
   }
 };
 
