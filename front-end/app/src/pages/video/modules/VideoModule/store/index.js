@@ -21,7 +21,7 @@ const actions = {
       }
     });
     if (data && data.data && data.data.datas) {
-      commit(types.SET_PROGRAM_INFO, data.data.datas[0]);
+      commit(types.SET_PROGRAM_INFO, data.data.datas);
     }
   }
 };

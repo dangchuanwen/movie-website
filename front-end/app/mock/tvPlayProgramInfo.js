@@ -7,7 +7,9 @@ const program_info = {
     "https://img.sokoyo-rj.com/tuku/upload/vod/2020-02-04/202002041580808144.jpg",
   type: "电视剧",
   fragment_number: 12,
-  watching_plot: 5
+  watching_plot: 5,
+  currentTime: 200,
+  duration: 2000
 };
 
 module.exports = {

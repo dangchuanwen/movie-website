@@ -4,11 +4,14 @@
       v-if="program.src"
       :src="program.src"
       :poster="program.poster_url"
+      :currentTime="program.currentTime"
+      @playerTimeUpdate="onPlayerTimeUpdate"
     ></video-container-component>
   </div>
 </template>
 
 <script>
+import request from "@/utils/request";
 import { mapState, mapActions } from "vuex";
 import VideoContainerComponent from "./components/VideoContainer";
 export default {
@@ -33,6 +36,17 @@ export default {
     this.getProgramInfo();
   },
   methods: {
+    onPlayerTimeUpdate({ currentTime, duration }) {
+      request({
+        method: "get",
+        url: "/api/storeProgress",
+        params: {
+          id: this.program.id,
+          currentTime,
+          duration
+        }
+      });
+    },
     getProgramInfo() {
       const { id, plot } = this.$route.query;
       this.getOneOfTvPlayProgramInfo({ id, plot: plot ? plot : 1 });
