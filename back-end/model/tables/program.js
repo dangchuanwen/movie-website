@@ -88,7 +88,7 @@ class Program extends Mysql {
       }
     } 
 
-    return Promise.resolve(datas);
+    return Promise.resolve(datas[0]);
   }
 
   async getSearchResult({ key_word, last_id, num }) {
