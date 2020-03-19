@@ -5,8 +5,11 @@
       class="video-player vjs-custom-skin"
       :playsinline="true"
       :options="playerOptions"
+      @play="handlePlay"
       @waiting="handleWaiting"
       @playing="handlePlaying"
+      @ready="handleReadied"
+      @loadeddata="handleLoadedData"
       @timeupdate="handlePlayerTimeupdate($event)"
     />
     <loading-component
@@ -38,10 +41,14 @@ export default {
     }
   },
   watch: {
+    currentTime(new_val) {
+      this.continued = new_val > 0;
+    },
     poster(new_val) {
       this.playerOptions.poster = new_val;
     },
     src(new_val) {
+      this.waiting = false;
       this.playerOptions.sources[0].src = new_val;
     }
   },
@@ -84,6 +91,7 @@ export default {
   },
   methods: {
     handlePlayerTimeupdate(player) {
+      this.waiting = false;
       if (this.isGetCurrentTime) {
         this.isGetCurrentTime = false;
         this.currentTime_timer = setTimeout(() => {
@@ -93,10 +101,14 @@ export default {
         this.$emit("playerTimeUpdate", { currentTime, duration });
       }
     },
+    handlePlay() {},
+    handleLoadedData() {},
+    handleReadied() {},
     handlePlaying() {
       if (this.continued) {
         this.continued = false;
-        this.player.currentTime(this.currentTime);
+        const { player } = this;
+        player.currentTime(this.currentTime);
       }
       this.waiting = false;
     },

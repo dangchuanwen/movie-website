@@ -1,17 +1,15 @@
 <template>
   <div
-    class="plot-module"
+    class="language-model-wrapper"
     v-if="
       program_info &&
-        program_info.plots &&
-        program_info.plots.length > 1 &&
-        program_info.languages.length === 0
+        program_info.languages &&
+        program_info.languages.length > 1
     "
   >
     <plot-list
-      :title="'剧情'"
-      :subTitle="`更新到第${program_info.plots.length}集`"
-      :list="program_info.plots"
+      :title="'剧集'"
+      :list="program_info.languages"
       :activeIndex="activeIndex"
       @handleClickPlotItem="handleClickPlotItem"
     ></plot-list>
@@ -32,22 +30,27 @@ export default {
       activeIndex: 0
     };
   },
-  watch: {},
   computed: {
     ...mapState({
       program_info: state => state.video.video_module.program_info
     })
   },
-  mounted() {
-    this.setActiveIndex();
+  watch: {
+    program_info() {
+      this.setActiveIndex();
+    }
   },
+  mounted() {},
   methods: {
     setActiveIndex() {
-      const { plot } = this.$route.query;
-      this.activeIndex = plot ? plot - 1 : 0;
+      const { language } = this.$route.query;
+      const index = this.program_info.languages.findIndex(
+        item => item === language
+      );
+      this.activeIndex = index !== -1 ? index : 0;
     },
     async handleClickPlotItem(index) {
-      const plot = this.program_info.plots[index];
+      const language = this.program_info.languages[index];
       const { path } = this.$route;
       const { id } = this.$route.query;
       const data = await request({
@@ -55,7 +58,7 @@ export default {
         url: "/api/updateProgramId",
         params: {
           id,
-          plot
+          language
         }
       });
 
@@ -64,7 +67,7 @@ export default {
           path: path,
           query: {
             id: data.data.datas.id,
-            plot
+            language
           }
         });
         window.location.reload();
@@ -75,7 +78,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.plot-module {
+.language-model-wrapper {
   width: 375px;
 }
 </style>

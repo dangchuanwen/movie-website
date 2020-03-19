@@ -8,7 +8,7 @@
         <hot-item
           class="f-fixed hot-item"
           v-for="item in hot_list"
-          :key="item.name"
+          :key="`${item.name}${item.fragment_order}`"
           :movie="item"
         ></hot-item>
       </div>
@@ -41,6 +41,9 @@ export default {
   watch: {
     hot_list() {
       this.$nextTick(() => {
+        if (this.hot_list.length === 0) {
+          return;
+        }
         this.bScroll = new BScroll(".history-list-wrapper", {
           scrollX: true,
           preventDefault: false

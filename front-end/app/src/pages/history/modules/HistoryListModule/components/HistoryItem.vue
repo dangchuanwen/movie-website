@@ -28,7 +28,7 @@ export default {
   },
   filters: {
     filterProgress(progress) {
-      return progress * 100;
+      return Math.floor(progress * 100);
     }
   }
 };

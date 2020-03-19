@@ -63,4 +63,10 @@ export default {
 a {
   text-decoration: none;
 }
+
+.no-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 </style>

@@ -16,7 +16,7 @@
         <history-item
           class="history-item"
           v-for="item of note.list"
-          :key="item.name"
+          :key="`${item.name}${item.fragment_order}`"
           :note="item"
         ></history-item>
       </div>

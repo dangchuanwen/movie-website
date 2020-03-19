@@ -4,11 +4,11 @@
     v-if="movie.name"
     :data-link="movie.link_url"
   >
-    <div class="poster-wrapper">
+    <div class="poster-wrapper f-fixed">
       <img class="poster_url" :src="movie.poster_url" alt="" />
     </div>
     <div class="info-wrapper f-fg-1 flex f-d-c">
-      <span class="name">{{ movie.name }}</span>
+      <span class="name no-wrap">{{ movie.name }}</span>
       <span class="classification">{{ movie.program_classification }}</span>
       <span class="director">导演：{{ movie.director_name }}</span>
       <rate-component
@@ -54,6 +54,7 @@ export default {
     }
   }
   .info-wrapper {
+    width: 126px;
     margin-left: 10px;
     height: 100%;
     .name {

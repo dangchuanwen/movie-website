@@ -20,7 +20,9 @@ export default {
     VideoContainerComponent
   },
   data() {
-    return {};
+    return {
+      storeProgressPromise: null
+    };
   },
   computed: {
     ...mapState({
@@ -36,20 +38,34 @@ export default {
     this.getProgramInfo();
   },
   methods: {
-    onPlayerTimeUpdate({ currentTime, duration }) {
-      request({
+    requestUpdateProgress({ currentTime, duration }) {
+      return request({
         method: "get",
         url: "/api/storeProgress",
         params: {
           id: this.program.id,
-          currentTime,
-          duration
+          currentTime: Math.floor(currentTime),
+          duration: Math.floor(duration)
         }
       });
     },
+    async onPlayerTimeUpdate({ currentTime, duration }) {
+      if (this.storeProgressPromise === null) {
+        this.storeProgressPromise = this.requestUpdateProgress({
+          currentTime,
+          duration
+        });
+      } else {
+        await this.storeProgressPromise;
+        this.storeProgressPromise = this.requestUpdateProgress({
+          currentTime,
+          duration
+        });
+      }
+    },
     getProgramInfo() {
-      const { id, plot } = this.$route.query;
-      this.getOneOfTvPlayProgramInfo({ id, plot: plot ? plot : 1 });
+      const { id } = this.$route.query;
+      this.getOneOfTvPlayProgramInfo({ id });
     },
     ...mapActions({
       getOneOfTvPlayProgramInfo: "video/video_module/getOneOfTvPlayProgramInfo"

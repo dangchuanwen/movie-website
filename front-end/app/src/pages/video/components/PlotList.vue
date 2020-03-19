@@ -1,9 +1,12 @@
 <template>
-  <div class="plot-list-component-wrapper flex f-d-c">
+  <div
+    class="plot-list-component-wrapper flex f-d-c"
+    v-if="list && list.length > 0"
+  >
     <div class="title-wrapper flex f-jc-sb">
-      <span class="title">剧情</span>
+      <span class="title">{{ title }}</span>
       <span class="latest-plot"
-        >更新至{{ latest_plot }}集<i class="iconfont icon-ziyuan"></i
+        >{{ subTitle }}<i class="iconfont icon-ziyuan"></i
       ></span>
     </div>
     <div class="plot-list-wrapper f-fg-1 flex" ref="plotListWrapper">
@@ -13,13 +16,13 @@
       >
         <div
           class="plot-item flex f-ai-c f-jc-c f-fixed"
-          v-for="(item, index) of latest_plot"
+          v-for="(item, index) of list"
           v-height="'plotItemHeight'"
           :key="item"
           :class="index === active_index ? 'choose' : ''"
           @click="handleClickPlotItem(index)"
         >
-          {{ index + 1 }}
+          {{ item }}
         </div>
       </div>
     </div>
@@ -30,30 +33,43 @@
 export default {
   name: "PlotListComponent",
   props: {
-    latest_plot: {
-      type: Number,
+    subTitle: {
+      type: String,
+      default: () => ""
+    },
+    title: {
+      type: String,
       required: true
     },
-    watching_plot: {
+    list: {
+      type: Array,
+      default: () => []
+    },
+    activeIndex: {
       type: Number,
-      default: () => 1
+      default: () => 0
+    }
+  },
+  watch: {
+    activeIndex(new_val) {
+      this.active_index = new_val;
     }
   },
   data() {
     return {
       plotItemHeight: 0,
-      active_index: this.watching_plot - 1
+      active_index: this.activeIndex
     };
   },
   mounted() {
     let plotItemHeight = Math.ceil((this.plotItemHeight * 9) / 7);
-    let scrollHeight = (Math.ceil(this.watching_plot / 5) - 4) * plotItemHeight;
+    let scrollHeight =
+      (Math.ceil((this.active_index + 1) / 5) - 4) * plotItemHeight;
     this.$refs.plotListWrapper.scrollTo(0, scrollHeight);
   },
   methods: {
     handleClickPlotItem(index) {
-      this.active_index = index;
-      this.$emit("handleClickPlotItem", index + 1);
+      this.$emit("handleClickPlotItem", index);
     }
   }
 };

@@ -11,13 +11,12 @@ const mutations = {
 };
 
 const actions = {
-  async getOneOfTvPlayProgramInfo({ commit }, { id, plot }) {
+  async getOneOfTvPlayProgramInfo({ commit }, { id }) {
     let data = await request({
       method: "get",
       url: "/api/tvPlayProgramInfo",
       params: {
-        id,
-        plot
+        id
       }
     });
     if (data && data.data && data.data.datas) {

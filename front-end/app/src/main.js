@@ -23,6 +23,7 @@ Vue.use(VideoPlayer);
 Vue.use(domWidth);
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
+Vue.prototype.bus = new Vue();
 
 listenClickATag(document.body, router);
 
