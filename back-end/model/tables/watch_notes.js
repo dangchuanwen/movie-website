@@ -41,7 +41,7 @@ class WatchNotes extends Mysql {
     // 最近一周的观看记录
     const last_week_timestamp = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;
     const sql = `select * from ${this.table_name} where token='${token}' and timestamp > ${last_week_timestamp}`;
-
+    let datas = [];
     let list = await this.query(sql);
     if (list) {
       let concurrentQueryResults = await mergeSeriesQuery(list, result => {
@@ -55,11 +55,18 @@ class WatchNotes extends Mysql {
         Object.assign(list[index], result[0]);
         // 添加belong 和 link_url 字段
         const item = list[index];
-        item.link_url = `/video?id=${item.id}`;
+        item.link_url = `/video?id=${item.id}&plot=${item.fragment_order}`;
       });
 
       // 去重，除去名字相同的
-      return Promise.resolve(list);
+      datas = list.reduce((prev, cur) => {
+        if (prev.findIndex(item => item.name === cur.name) === -1) {
+          prev.push(cur);
+        }
+        return prev;
+      }, datas);
+
+      return Promise.resolve(datas);
     } else {
       return Promise.resolve(false);
     }
@@ -102,19 +109,22 @@ class WatchNotes extends Mysql {
       let datas = [];
       for (let key of Object.keys(map).sort((a, b) => b - a)) {
         const date = key.slice(4);
-        // 添加 belong, link_url, progress属性
+        // 添加 belong, link_url, progress属性，并且去重
         const list = map[key];
+        let temp_list = [];
         if (list && list.length > 0) {
-          list.forEach(item => {
-            item.link_url = `/video?id=${item.id}`;
-            item.progress = (item.watch_time_length / item.time_length).toFixed(
-              2
-            );
-          });
+          temp_list = list.reduce((prev, cur) => {
+            if (prev.findIndex(item => item.name === cur.name) === -1) {
+              cur.link_url = `/video?id=${cur.id}&plot=${cur.fragment_order}`;
+              cur.progress = (cur.watch_time_length / cur.time_length).toFixed(2);
+              prev.push(cur);
+            }
+            return prev;
+          }, temp_list);
         }
         datas.push({
           date,
-          list: map[key]
+          list: temp_list
         });
       }
 

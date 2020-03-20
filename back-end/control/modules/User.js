@@ -33,10 +33,6 @@ async function login(ctx) {
 async function watchHistory(ctx) {
   const WatchNotes = require("../../model/tables/watch_notes");
   let token = ctx.cookies.get("token");
-
-  if (!token) {
-    token = 'dd';
-  } 
   const datas = await WatchNotes.getLatestWeekNotes(token);
   ctx.body = Response(datas);
 }
@@ -44,9 +40,6 @@ async function watchHistory(ctx) {
 async function allWatchHistory(ctx) {
   const WatchNotes = require("../../model/tables/watch_notes");
   let token = ctx.cookies.get("token");
-  if (!token) {
-    token = 'dd';
-  } 
   const datas = await WatchNotes.getAllWatchNotes(token);
   ctx.body = Response(datas);
 }
@@ -55,9 +48,6 @@ async function storeProgress(ctx) {
   const WatchNotes = require("../../model/tables/watch_notes");
   const { id, currentTime, duration } = ctx.query;
   let token = ctx.cookies.get("token");
-  if (!token) {
-    token = 'dd';
-  }
   const datas = await WatchNotes.storeProgress({ id, currentTime, duration, token });
   ctx.body = Response(datas);
 }
