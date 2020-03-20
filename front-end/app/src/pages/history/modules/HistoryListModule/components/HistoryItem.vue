@@ -4,7 +4,7 @@
       <img class="poster" :src="note.poster_url" alt="" />
     </div>
     <div class="info-wrapper flex f-d-c">
-      <span class="name">{{ note.name }}</span>
+      <span class="name">{{ realName(note) }}</span>
       <span class="classification">{{ note.program_classification }}</span>
       <span class="progress-text"
         >已观看{{ note.progress | filterProgress }}%</span
@@ -24,6 +24,21 @@ export default {
     note: {
       type: Object,
       default: () => null
+    }
+  },
+  methods: {
+    twoNumbers(number) {
+      return number < 10 ? "0" + number : number;
+    },
+    realName(note) {
+      const twoNumbers = this.twoNumbers;
+      const { name, fragment_number, fragment_order } = note;
+      let subName = "";
+      subName =
+        note.language ||
+        (fragment_number > 1 ? `第${twoNumbers(fragment_order)}集` : "") ||
+        "";
+      return name + "  " + subName;
     }
   },
   filters: {

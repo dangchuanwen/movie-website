@@ -10,7 +10,7 @@
     <div class="info-wrapper f-fg-1 flex f-d-c">
       <span class="name no-wrap">{{ movie.name }}</span>
       <span class="classification">{{ movie.program_classification }}</span>
-      <span class="director">导演：{{ movie.director_name }}</span>
+      <span class="director no-wrap">导演：{{ movie.director_name }}</span>
       <rate-component
         class="rate"
         :score="movie.program_score"

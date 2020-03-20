@@ -11,8 +11,9 @@
 </template>
 
 <script>
+import types from "./store/mutations-type";
 import request from "@/utils/request";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import VideoContainerComponent from "./components/VideoContainer";
 export default {
   name: "VideoModule",
@@ -36,6 +37,10 @@ export default {
   },
   mounted() {
     this.getProgramInfo();
+  },
+  beforeDestroy() {
+    // 设置为空
+    this.setProgramInfo({});
   },
   methods: {
     requestUpdateProgress({ currentTime, duration }) {
@@ -67,6 +72,9 @@ export default {
       const { id } = this.$route.query;
       this.getOneOfTvPlayProgramInfo({ id });
     },
+    ...mapMutations({
+      setProgramInfo: `video/video_module/${types.SET_PROGRAM_INFO}`
+    }),
     ...mapActions({
       getOneOfTvPlayProgramInfo: "video/video_module/getOneOfTvPlayProgramInfo"
     })
