@@ -55,7 +55,11 @@ class WatchNotes extends Mysql {
         Object.assign(list[index], result[0]);
         // 添加belong 和 link_url 字段
         const item = list[index];
-        item.link_url = `/video?id=${item.id}&plot=${item.fragment_order}`;
+        if (item.language) {
+          item.link_url = `/video?id=${item.id}&language=${item.language}`;
+        } else {
+          item.link_url = `/video?id=${item.id}&plot=${item.fragment_order}`;
+        }
       });
 
       // 去重，除去名字相同的
@@ -115,8 +119,14 @@ class WatchNotes extends Mysql {
         if (list && list.length > 0) {
           temp_list = list.reduce((prev, cur) => {
             if (prev.findIndex(item => item.name === cur.name) === -1) {
-              cur.link_url = `/video?id=${cur.id}&plot=${cur.fragment_order}`;
-              cur.progress = (cur.watch_time_length / cur.time_length).toFixed(2);
+              if (cur.language) {
+                cur.link_url = `/video?id=${cur.id}&language=${cur.language}`;
+              } else {
+                cur.link_url = `/video?id=${cur.id}&plot=${cur.fragment_order}`;
+              }
+              cur.progress = (cur.watch_time_length / cur.time_length).toFixed(
+                2
+              );
               prev.push(cur);
             }
             return prev;
