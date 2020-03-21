@@ -40,7 +40,9 @@ class WatchNotes extends Mysql {
   async getLatestWeekNotes(token) {
     // 最近一周的观看记录
     const last_week_timestamp = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;
-    const sql = `select * from ${this.table_name} where token='${token}' and timestamp > ${last_week_timestamp}`;
+    const sql = `select * from ${this.table_name} 
+                where token='${token}' 
+                and   timestamp > ${last_week_timestamp} order by id desc`;
     let datas = [];
     let list = await this.query(sql);
     if (list) {

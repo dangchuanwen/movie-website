@@ -16,6 +16,7 @@ async function hotList(ctx) {
   ctx.body = Response(datas);
 }
 async function programWallDatas(ctx) {
+  const token = ctx.cookies.get("token");
   const {
     program_type,
     program_classification,
@@ -31,7 +32,8 @@ async function programWallDatas(ctx) {
     release_year: publish_year,
     publish_area,
     last_id,
-    num
+    num,
+    token
   });
   ctx.body = Response(datas);
 }

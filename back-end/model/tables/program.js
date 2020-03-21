@@ -10,8 +10,8 @@ class Program extends Mysql {
     super(config);
   }
 
-  async getProgramWallDatas({ program_type, program_classification, release_year, publish_area, last_id, num }) {
-    const sql = `select * from list where
+  async getProgramWallDatas({ token, program_type, program_classification, release_year, publish_area, last_id, num }) {
+    let sql = `select * from list where
                  is_show=1 and 
                  program_type='${program_type}' and
                  program_classification like '%${ filter(program_classification) }%' and
@@ -21,14 +21,35 @@ class Program extends Mysql {
                  limit ${num}
                 `;
     let results = await this.query(sql);
-    
-    // 为每条数据添加 link_url 字段
+    let datas = results;
+    // 查询当前节目用户观看的集数，为每条数据添加 link_url 字段
     if (results && results.length > 1) {
-      results.forEach(item => {
-        item.link_url = `/video?id=${item.id}`;
-      });
+      for (let item of results) {       
+          const { name } = item;
+          sql = `select watch_notes.program_id, 
+                program.fragment_order as plot,
+                program.language  
+                from watch_notes, program 
+                where program.name='${name}' 
+                and program.id=watch_notes.program_id 
+                and watch_notes.token='${token}'
+                order by watch_notes.id desc limit 1`;
+          results = await this.query(sql);
+          if (results && results.length > 0) {
+            const { language, plot, program_id } = results[0];
+            // 重写节目的 id
+            item.id = program_id;
+            if (language) {
+              item.link_url = `/video?id=${item.id}&language=${language}`;
+            } else {
+              item.link_url = `/video?id=${item.id}&plot=${plot}`;
+            }
+          } else {
+            item.link_url = `/video?id=${item.id}&plot=1`;
+          }
+      }
     }
-    return Promise.resolve(results);
+    return Promise.resolve(datas);
   }
 
   async searchProgram(key_word) {
