@@ -12,14 +12,6 @@ import store from "@/store/index.js";
 import { domWidth } from "@/directives";
 import { listenClickATag } from "@/utils/util";
 
-// 引入 vue-video-player
-import VideoPlayer from "vue-video-player";
-import "video.js/dist/video-js.css";
-import "vue-video-player/src/custom-theme.css";
-import hls from "videojs-contrib-hls";
-Vue.use(hls);
-Vue.use(VideoPlayer);
-
 Vue.use(domWidth);
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;

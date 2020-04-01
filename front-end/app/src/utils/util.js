@@ -17,7 +17,7 @@ export const listenClickATag = function(body, router) {
         e.preventDefault();
         const route = dom.dataset.link;
         if (!route) {
-          console.log("a 标签上的 link_url 不正确，其值为", route);
+          console.log("a 标签上的 link_url 不正确，其值为", route); // eslint-disable-line
         } else {
           router.push({
             path: route
