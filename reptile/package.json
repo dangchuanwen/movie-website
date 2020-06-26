@@ -2,14 +2,14 @@
   "name": "reptile",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "superagent": "^5.2.1"
+  "dependencies": {
+    "superagent": "^5.2.2",
+    "xml2js": "^0.4.23"
   }
 }
