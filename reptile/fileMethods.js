@@ -22,6 +22,7 @@
  
 const fs = require("fs");
 const path = require("path");
+const { resolve } = require("path");
 
 /**
  * 将记录（一条或多条）追加写入到文件中
@@ -143,14 +144,16 @@ function writeToFileBaseOrder(program_info) {
 
 
 async function writeToFile(program_infos) {
-  for (let program of program_infos) {
-    try {
-      await writeToFileBaseOrder(program);
-      await writeToFileBaseName(program);
-    } catch(err) {
-      console.log(err);
+  return new Promise((resolve, reject) => {
+    for (let program of program_infos) {
+      try {
+        await writeToFileBaseOrder(program);
+        await writeToFileBaseName(program);
+      } catch(err) {
+        reject(err);
+      }
     }
-  }
+  });
 }
 
 module.exports = writeToFile;

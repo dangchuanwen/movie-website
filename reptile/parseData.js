@@ -27,24 +27,22 @@ function parseType(type) {
   return res;
 }
 
-
 /**
- * 
+ *
  * @param {String} m3u8_string 包含语言的链接
- * @returns {Array} 节目的语言选项 
+ * @returns {Array} 节目的语言选项
  */
 function parseLanguage(m3u8_string) {
   const match = m3u8_string.match(/HD(.*?)\$/g);
   const languages = [];
   if (Array.isArray(match)) {
-    match.forEach(item => {
+    match.forEach((item) => {
       const language = item.match(/HD(.*?)\$/)[1];
       languages.push(language);
     });
   }
   return languages;
 }
-
 
 /**
  * 解析m3u8链接
@@ -56,7 +54,6 @@ function parseM3U8(m3u8_string) {
   return m3u8_links;
 }
 
-
 /**
  * @param { Number } low 闭区间低位
  * @param { Number } high 闭区间高位
@@ -66,11 +63,9 @@ function randomScore(low = 8.0, high = 9.5) {
   const deca_low = low * 10;
   const deca_high = high * 10;
   const r = Math.random();
-  const deca_score = Math.ceil( 
-    (deca_high - deca_low) * r + deca_low 
-  );
+  const deca_score = Math.ceil((deca_high - deca_low) * r + deca_low);
   const score = (deca_score / 10).toFixed(1);
-  return score;  
+  return score;
 }
 
 /**
@@ -114,61 +109,64 @@ function parse(xml) {
         reject(err);
         return;
       }
-      pageCount = res.rss.list[0].$.pagecount;
-      const videos = res.rss.list[0].video;
-      
-      videos.forEach((video) => {
-        let name = video.name[0],
-          type = video.type[0],
-          poster_url = video.pic[0],
-          program_language = video.lang[0],
-          program_area = video.area[0],
-          note = video.note[0],
-          release_year = video.year[0],
-          main_performer = video.actor[0],
-          director_name = video.director[0],
-          program_introduce = video.des[0];
+      try {
+        pageCount = res.rss.list[0].$.pagecount;
+        const videos = res.rss.list[0].video;
 
-        // 解析 type
-        const { program_type, program_classification } = parseType(type);
+        videos.forEach((video) => {
+          let name = video.name[0],
+            type = video.type[0],
+            poster_url = video.pic[0],
+            program_language = video.lang[0],
+            program_area = video.area[0],
+            note = video.note[0],
+            release_year = video.year[0],
+            main_performer = video.actor[0],
+            director_name = video.director[0],
+            program_introduce = video.des[0];
 
-        // 解析 m3u8链接
-        let m3u8_string = video.dl[0].dd[0]._;
-        const m3u8_links = parseM3U8(m3u8_string);
+          // 解析 type
+          const { program_type, program_classification } = parseType(type);
 
-        // 评分随机 8.0 - 9.5
-        const program_score = randomScore();
+          // 解析 m3u8链接
+          let m3u8_string = video.dl[0].dd[0]._;
+          const m3u8_links = parseM3U8(m3u8_string);
 
-        // 解析链接中的语言
-        const language = parseLanguage(m3u8_string);
+          // 评分随机 8.0 - 9.5
+          const program_score = randomScore();
 
-        // 提取节目介绍中的中文，去掉标签内容, 以及替换英文引号为中文引号
-        program_introduce = parseProgramIntroduce(program_introduce);
-        // 是否显示
-        const is_show = program_classification.indexOf("伦理") !== -1 ? 0 : 1;
+          // 解析链接中的语言
+          const language = parseLanguage(m3u8_string);
 
-        /* 其他数据无需解析*/
+          // 提取节目介绍中的中文，去掉标签内容, 以及替换英文引号为中文引号
+          program_introduce = parseProgramIntroduce(program_introduce);
+          // 是否显示
+          const is_show = program_classification.indexOf("伦理") !== -1 ? 0 : 1;
 
-        // 当前节目解析完毕，添加到 res 中
-        programs.push({
-          name,
-          poster_url,
-          program_language,
-          program_area,
-          release_year,
-          note,
-          main_performer,
-          director_name,
-          program_introduce,
-          program_type,
-          program_classification,
-          m3u8_links,
-          language,
-          program_score,
-          is_show
+          /* 其他数据无需解析*/
+
+          // 当前节目解析完毕，添加到 res 中
+          programs.push({
+            name,
+            poster_url,
+            program_language,
+            program_area,
+            release_year,
+            note,
+            main_performer,
+            director_name,
+            program_introduce,
+            program_type,
+            program_classification,
+            m3u8_links,
+            language,
+            program_score,
+            is_show,
+          });
         });
-
-      });
+      } catch(err) {
+        reject(err);
+      }
     });
     programs.pageCount = pageCount;
     // 解析完毕，resolve出去, 交给写入程序处理
