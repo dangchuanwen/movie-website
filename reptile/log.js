@@ -7,7 +7,7 @@ const path = require("path");
  */
 function log(err) {
   const { stack } = err;
-  const content = `\n${stack}\n`
+  const content = `\n${stack}${new Date()}\n`;
   fs.appendFile(path.resolve(__dirname, "./log.txt"), content, "utf8", (e) => {});
 } 
 
