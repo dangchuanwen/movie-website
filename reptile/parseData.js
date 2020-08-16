@@ -50,8 +50,12 @@ function parseLanguage(m3u8_string) {
  * @return {Array} 节目的m3u8链接
  */
 function parseM3U8(m3u8_string) {
-  const m3u8_links = m3u8_string.match(/http.*?m3u8/g);
-  return m3u8_links;
+  if (m3u8_string) {
+    const m3u8_links = m3u8_string.match(/http.*?m3u8/g);
+    return m3u8_links;
+  } else {
+    return '';
+  }
 }
 
 /**
@@ -73,7 +77,7 @@ function randomScore(low = 8.0, high = 9.5) {
  * @param { String } program_introduce 节目介绍
  * @return { String } 返回的内容
  */
-function parseProgramIntroduce(program_introduce) {
+function replaceQuo(program_introduce) {
   program_introduce = program_introduce.replace(/[(\n)(&nbsp;)]/g, "");
   program_introduce = program_introduce.replace(/[(')(")]/g, "’");
   let res = program_introduce.replace(/<.*?>/g, "");
@@ -138,8 +142,11 @@ function parse(xml) {
           // 解析链接中的语言
           const language = parseLanguage(m3u8_string);
 
-          // 提取节目介绍中的中文，去掉标签内容, 以及替换英文引号为中文引号
-          program_introduce = parseProgramIntroduce(program_introduce);
+          // 将英文引号替换为中文引号
+          program_introduce = replaceQuo(program_introduce);
+          name = replaceQuo(name);
+          director_name = replaceQuo(director_name);
+          main_performer = replaceQuo(main_performer);
           // 是否显示
           const is_show = program_classification.indexOf("伦理") !== -1 ? 0 : 1;
 

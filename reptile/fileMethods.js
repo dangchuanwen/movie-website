@@ -107,7 +107,7 @@ function writeToFileBaseName(program_info) {
     (Array.isArray(program.m3u8_links) && program.m3u8_links.length) || 1;
   program.fragment_order = 1;
   program.language = (program.language.length > 0 && program.language[0]) || "";
-  program.m3u8_link = program.m3u8_links[0];
+  program.m3u8_link = Array.isArray(program.m3u8_links) && program.m3u8_links[0] || '';
 
   const content = createInsertNote(program) + "\n";
   return writeFile(content, path.resolve(__dirname, "./baseName.sql"));
