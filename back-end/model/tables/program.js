@@ -129,7 +129,7 @@ class Program extends Mysql {
   }
 
   async getSearchResult({ key_word, last_id, num }) {
-    const sql = `select * from list where name like '%${key_word}%' and id > ${last_id} order by id limit ${num}`;
+    const sql = `select * from program where name like '%${key_word}%' and id > ${last_id} and fragment_order=1 order by id limit ${num}`;
     const result = await this.query(sql);
     if (result && result.length > 0) {
       result.forEach(item => {
