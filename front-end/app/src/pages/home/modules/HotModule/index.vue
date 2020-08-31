@@ -41,10 +41,12 @@ export default {
   watch: {
     hot_list() {
       this.$nextTick(() => {
-        this.bScroll = new BScroll(".hot-list-wrapper", {
-          scrollX: true,
-          preventDefault: false
-        });
+        if (this.hot_list && this.hot_list.length > 0) {
+          this.bScroll = new BScroll(".hot-list-wrapper", {
+            scrollX: true,
+            preventDefault: false
+          });
+        }
       });
     }
   },

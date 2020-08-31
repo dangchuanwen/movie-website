@@ -91,12 +91,7 @@ export default {
     this.setAllSlidesScale();
   },
   methods: {
-    handleTouchMove() {
-      clearTimeout(this.touch_move_timer);
-      this.touch_move_timer = setTimeout(() => {
-        this.setAllSlidesScale();
-      }, 10);
-    },
+    handleTouchMove() {},
     getScale(x) {
       // y = kx + b
       // b = 1 because f(0) = 1;

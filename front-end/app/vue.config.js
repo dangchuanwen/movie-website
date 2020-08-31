@@ -1,11 +1,42 @@
-const debug = process.env.NODE_ENV !== "production";
+const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
 module.exports = {
   publicPath: "./",
-  configureWebpack: config => {
-    if (debug) {
-      console.log("设置source-map");
-      config.devtool = "source-map";
-    }
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          swiper: {
+            chunks: "initial",
+            test: /(swiper|better-scroll)/,
+            priority: 1
+          }
+        }
+      }
+    },
+    plugins: [
+      new HtmlWebpackExternalsPlugin({
+        externals: [
+          {
+            module: "vue",
+            entry: {
+              path: "https://cdn.jsdelivr.net/npm/vue@2.6.10",
+              type: "js"
+            },
+            global: "Vue"
+          },
+          {
+            module: "vue-router",
+            entry: "https://unpkg.com/vue-router@3.1.5/dist/vue-router.min.js",
+            global: "VueRouter"
+          },
+          {
+            module: "vuex",
+            entry: "https://unpkg.com/vuex@3.1.2/dist/vuex.min.js",
+            global: "Vuex"
+          }
+        ]
+      })
+    ]
   },
   css: {
     loaderOptions: {

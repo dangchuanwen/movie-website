@@ -42,12 +42,14 @@ export default {
   },
   watch: {
     hot_recommend_list() {
-      this.$nextTick(() => {
-        this.bScroll = new BScroll(".recommend-list-wrapper", {
-          scrollX: true,
-          preventDefault: false
+      if (this.hot_recommend_list && this.hot_recommend_list.length > 0) {
+        this.$nextTick(() => {
+          this.bScroll = new BScroll(".recommend-list-wrapper", {
+            scrollX: true,
+            preventDefault: false
+          });
         });
-      });
+      }
     }
   },
   methods: {

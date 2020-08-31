@@ -2,9 +2,6 @@ import VueRouter from "vue-router";
 import Vue from "vue";
 
 // 页面组件
-import ClassificationPage from "@/pages/classification";
-import SearchPage from "@/pages/search";
-import HomePage from "@/pages/home";
 
 Vue.use(VueRouter);
 
@@ -17,7 +14,7 @@ const routes = [
       {
         name: "home", // tabBar 如果是 tabBar 必须加上
         path: "/home",
-        component: HomePage,
+        component: () => import("@/pages/home"),
         alias: "/",
         tabBar: {
           icon: "icon-home", // 阿里 iconfont class="iconfont ${icon}"
@@ -32,7 +29,7 @@ const routes = [
       {
         name: "classification",
         path: "/classification/:program_type",
-        component: ClassificationPage,
+        component: () => import("@/pages/classification"),
         tabBar: {
           icon: "icon-classify-on",
           color: "#FFAD66",
@@ -43,7 +40,7 @@ const routes = [
   },
   {
     path: "/search",
-    component: SearchPage
+    component: () => import("@/pages/search")
   },
   {
     path: "/history",
