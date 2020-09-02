@@ -1,7 +1,6 @@
 const store = {};
 
 function set(key, value) {
-  console.log(key, value);
   store[key] = value;
 }
 
