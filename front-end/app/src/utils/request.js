@@ -1,7 +1,5 @@
 import axios from "axios";
-if (!process && !process.env) {
-  axios.defaults.baseURL = "http://movie.isay.xn--6qq986b3xl";
-}
+axios.defaults.baseURL = process.env.BASE_URL;
 function request(options) {
   return axios(options)
     .then(res => res)

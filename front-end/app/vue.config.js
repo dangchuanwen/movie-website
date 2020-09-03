@@ -1,42 +1,11 @@
-const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
+//const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
+const webpack_prod = require("./webpack.prod");
 module.exports = {
   publicPath: "./",
-  configureWebpack: {
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          swiper: {
-            chunks: "initial",
-            test: /(swiper|better-scroll)/,
-            priority: 1
-          }
-        }
-      }
-    },
-    plugins: [
-      new HtmlWebpackExternalsPlugin({
-        externals: [
-          {
-            module: "vue",
-            entry: {
-              path: "https://cdn.jsdelivr.net/npm/vue@2.6.10",
-              type: "js"
-            },
-            global: "Vue"
-          },
-          {
-            module: "vue-router",
-            entry: "https://unpkg.com/vue-router@3.1.5/dist/vue-router.min.js",
-            global: "VueRouter"
-          },
-          {
-            module: "vuex",
-            entry: "https://unpkg.com/vuex@3.1.2/dist/vuex.min.js",
-            global: "Vuex"
-          }
-        ]
-      })
-    ]
+  chainWebpack: config => {
+    if (process.env.NODE_ENV === "production") {
+      webpack_prod(config);
+    }
   },
   css: {
     loaderOptions: {
